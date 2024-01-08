@@ -1,0 +1,122 @@
+Paladin.png
+size:2048,2048
+filter:Linear,Linear
+pma:true
+scale:0.5
+Damage/01.weapon2S
+bounds:1359,601,179,557
+rotate:270
+Damage/05.L  lower armSS
+bounds:1172,1627,121,82
+Damage/05.L  upper armS
+bounds:1398,1343,136,202
+Damage/05.L chestS02
+bounds:1934,1494,112,124
+Damage/05.L legS
+bounds:587,456,217,356
+rotate:90
+Damage/05.L thighS04
+bounds:1870,652,176,359
+Damage/05.R chestS
+bounds:1343,1230,109,119
+Damage/05.R legS
+bounds:138,690,170,468
+Damage/05.R thighS03
+bounds:100,536,163,300
+rotate:270
+Damage/05.body05S
+bounds:1070,1702,194,344
+offsets:0,19,194,363
+Damage/06.skirt01S
+bounds:478,622,414,145
+rotate:180
+Original/01.weapon2
+bounds:946,619,179,557
+rotate:270
+Original/02.hatB
+bounds:1809,1928,179,118
+offsets:9,7,188,125
+Original/03.hair F
+bounds:1556,1090,150,102
+Original/03.hair01
+bounds:938,423,211,437
+rotate:90
+Original/03.hair02
+bounds:1578,389,341,354
+rotate:180
+Original/03.hair03
+bounds:1659,745,387,515
+Original/03.hair04
+bounds:1325,715,230,489
+Original/03.hair05
+bounds:1454,1182,394,519
+rotate:180
+Original/04.blush
+bounds:1907,1653,139,63
+offsets:2,0,141,63
+Original/04.face01 L eyes
+bounds:149,1991,58,55
+Original/04.face01 R eyes
+bounds:2,1996,49,50
+Original/04.face02 L eyes
+bounds:1217,1992,58,54
+Original/04.face02 R eyes
+bounds:475,1998,49,48
+Original/04.face1
+bounds:1899,1710,147,155
+Original/04.face1 L eyes ball
+bounds:524,2022,25,24
+Original/04.face2 L eyes ball
+bounds:524,2022,25,24
+Original/04.face1 L eyes ball2
+bounds:50,2022,25,24
+Original/04.face1 R eyes ball
+bounds:551,2023,24,23
+Original/04.face2 R eyes ball
+bounds:551,2023,24,23
+Original/04.face1 R eyes ball2
+bounds:302,2023,24,23
+Original/04.face2
+bounds:1254,1891,147,155
+Original/04.face3
+bounds:2,1545,147,155
+Original/04.face4
+bounds:1020,1556,147,155
+Original/05.L  lower arm2
+bounds:1537,1963,122,83
+Original/05.L  upper arm2
+bounds:1372,1259,136,195
+offsets:0,3,136,198
+Original/05.L chest
+bounds:1235,1781,101,113
+offsets:1,0,104,113
+Original/05.L leg
+bounds:170,429,217,356
+rotate:90
+Original/05.L thigh03
+bounds:1839,1205,180,361
+Original/05.R  lower arm
+bounds:986,1302,71,147
+Original/05.R chest
+bounds:1000,1442,109,119
+Original/05.R leg
+bounds:2,757,170,468
+Original/05.R thigh03
+bounds:467,1883,163,300
+rotate:90
+Original/05.R upper arm
+bounds:329,1614,107,190
+Original/05.body05
+bounds:2,1700,199,346
+offsets:0,17,199,363
+Original/06.skirt01
+bounds:186,1632,414,145
+rotate:90
+Original/07.weapon1
+bounds:778,650,763,1396
+Original/爆衣02
+bounds:1518,1547,499,459
+offsets:288,539,1103,1377
+rotate:270
+Original/爆衣06
+bounds:2,687,1086,1359

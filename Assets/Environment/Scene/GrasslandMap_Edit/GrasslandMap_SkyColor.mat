@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7998866667203839751
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GrasslandMap_SkyColor
+  m_Shader: {fileID: -6465566751694194690, guid: 5dd1ed244e295b748b1f81aa5d7917d0,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
+  - SHADOWCASTER
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 2ad78337742e8c848b3cb4978c7cdf66, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 1
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _B: 0
+    - _Blend: 0
+    - _BlendPower: 0
+    - _BlendStrength: 1
+    - _CastShadows: 0
+    - _Cull: 2
+    - _Displace: 1
+    - _DownSmooth: -8
+    - _DstBlend: 10
+    - _Exposure: 0
+    - _G: 0
+    - _G_1: 0
+    - _Gray: 0
+    - _Height: 1
+    - _HorizonLineContribution: 0.25
+    - _HorizonLineExponent: 4
+    - _InteractionDistance: 1.5
+    - _NormalStrength: 0
+    - _Position: 0
+    - _QueueControl: 1
+    - _QueueOffset: 0
+    - _R: 0
+    - _Scale: 0.25
+    - _SkyGradientExponent: 2.5
+    - _Smooth: 1
+    - _Smoothness: 0
+    - _Speed: 2
+    - _SrcBlend: 5
+    - _Strengh: 0
+    - _Strength: 1.5
+    - _SunDiscExponent: 125000
+    - _SunDiscMultiplier: 25
+    - _SunHaloContribution: 0.75
+    - _SunHaloExponent: 125
+    - _Surface: 1
+    - _TopPosition: 20
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    - _position: -10
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _ColorA: {r: 1, g: 0.9490196, b: 0, a: 0}
+    - _ColorB: {r: 0.05882353, g: 0.4156863, b: 0, a: 0}
+    - _Color_A: {r: 0, g: 0.3028426, b: 1, a: 0}
+    - _Color_B: {r: 1, g: 1, b: 1, a: 0}
+    - _Color_Down: {r: 0.35686275, g: 0.8117648, b: 0.9607844, a: 0}
+    - _Color_Top: {r: 0.29411766, g: 0.70980394, b: 0.9960785, a: 0}
+    - _DryColor: {r: 0, g: 0.07843138, b: 1, a: 0}
+    - _HealthyColor: {r: 0.8018868, g: 0.3633093, b: 0.3215112, a: 0}
+    - _HorizonLineColor: {r: 0.9044118, g: 0.8872592, b: 0.7913603, a: 1}
+    - _SkyGradientBottom: {r: 0.764706, g: 0.8156863, b: 0.8509805, a: 1}
+    - _SkyGradientTop: {r: 0.172549, g: 0.5686274, b: 0.6941177, a: 1}
+    - _SunDiscColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SunHaloColor: {r: 0.8970588, g: 0.7760561, b: 0.6661981, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

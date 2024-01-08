@@ -1,0 +1,177 @@
+GoblinLeader.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+scale:0.4
+139-1
+bounds:717,616,132,106
+rotate:180
+139-2
+bounds:506,22,70,77
+139-3
+bounds:423,26,67,65
+Shadow
+bounds:745,986,208,36
+圖層 102
+bounds:72,1002,20,139
+offsets:0,0,20,142
+rotate:90
+圖層 103
+bounds:1002,455,20,83
+offsets:0,0,20,84
+圖層 115
+bounds:577,6,153,121
+圖層 123
+bounds:2,587,861,435
+offsets:0,6,918,441
+圖層 124
+bounds:381,444,145,124
+offsets:0,0,145,138
+rotate:90
+圖層 126
+bounds:269,38,80,67
+offsets:16,0,96,67
+圖層 127-1
+bounds:834,717,240,188
+rotate:90
+圖層 131
+bounds:2,24,270,298
+rotate:270
+圖層 132-1
+bounds:2,309,373,304
+圖層 133
+bounds:246,93,330,287
+rotate:180
+圖層 133-1
+bounds:496,275,526,421
+offsets:0,3,526,424
+圖層 134
+bounds:2,649,118,103
+圖層 136
+bounds:577,106,395,168
+圖層 139-1
+bounds:859,23,163,120
+rotate:180
+圖層 141
+bounds:2,961,68,61
+圖層 142
+bounds:955,968,63,54
+圖層 143
+bounds:970,705,52,69
+圖層 90
+bounds:970,705,52,69
+圖層 144
+bounds:787,24,70,80
+圖層 200
+bounds:862,863,14,50
+圖層 201
+bounds:2,755,26,35
+圖層 202
+bounds:999,782,23,51
+圖層 203
+bounds:979,521,43,109
+offsets:2,0,58,109
+圖層 204
+bounds:2,914,22,45
+圖層 65
+bounds:26,34,96,60
+offsets:0,1,96,61
+圖層 68
+bounds:993,219,29,149
+offsets:13,0,46,161
+圖層 70
+bounds:2,401,19,82
+圖層 71
+bounds:718,48,68,56
+offsets:1,4,80,60
+圖層 76
+bounds:657,600,59,49
+圖層 81
+bounds:72,969,25,36
+圖層 83
+bounds:965,151,52,123
+offsets:0,2,52,125
+圖層 86
+bounds:347,379,72,84
+offsets:4,2,76,86
+圖層 87
+bounds:122,613,66,115
+offsets:2,0,68,115
+rotate:270
+圖層 88
+bounds:321,14,77,116
+offsets:0,1,77,117
+rotate:90
+圖層 89
+bounds:954,621,62,82
+offsets:2,0,64,84
+圖層 93
+bounds:844,911,68,73
+圖層 94
+bounds:2,614,61,80
+offsets:2,0,70,80
+圖層 95
+bounds:428,392,66,59
+offsets:2,0,68,61
+圖層 96
+bounds:215,23,62,54
+offsets:0,0,63,54
+rotate:90
+圖層140
+bounds:2,292,76,86
+
+GoblinLeader_2.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+scale:0.4
+圖層 106
+bounds:28,446,506,637
+offsets:3,2,518,639
+rotate:90
+圖層 107
+bounds:163,830,268,122
+rotate:180
+圖層 112
+bounds:2,158,137,684
+rotate:90
+圖層 113
+bounds:789,780,163,172
+offsets:13,2,176,174
+圖層 117
+bounds:338,779,223,173
+offsets:4,0,227,174
+圖層 121
+bounds:217,286,311,242
+rotate:180
+圖層 122
+bounds:584,668,353,121
+offsets:20,11,387,149
+rotate:180
+圖層 135
+bounds:530,289,290,257
+offsets:297,0,587,266
+rotate:90
+圖層 138
+bounds:654,792,160,136
+offsets:52,0,212,168
+rotate:90
+圖層 2
+bounds:2,474,306,224
+圖層 74
+bounds:673,471,266,234
+offsets:0,0,270,236
+圖層 91
+bounds:108,849,95,103
+offsets:0,0,96,103
+rotate:180
+圖層 92
+bounds:2,844,68,108
+offsets:0,0,74,108
+圖層 98
+bounds:64,860,92,44
+offsets:0,2,95,46
+rotate:90
+圖層 99
+bounds:119,715,283,107
+offsets:3,1,286,108

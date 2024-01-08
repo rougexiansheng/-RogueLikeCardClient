@@ -1,0 +1,160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7998866667203839751
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GrasslandMap_Cloud
+  m_Shader: {fileID: -6465566751694194690, guid: 1303653291ad38c42bb65ed8977bef1c,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords:
+  - _ENUM_A
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - DepthOnly
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CloudBaseColor_3ff5b31e0cd04b31ae57bd6cae352a31_Texture2D_1873350715_Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: 584bf479a3c19a64491d7f9dd980c36c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture01:
+        m_Texture: {fileID: 2800000, guid: 36db8746047b6d145881f77ec0e30283, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture02:
+        m_Texture: {fileID: 2800000, guid: 4de82dfb287ba2f49baf3a2fc68f0705, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture02_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture02_2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture02_3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture03:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture04:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture05:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 0.5
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _CastShadows: 1
+    - _Cull: 2
+    - _DstBlend: 10
+    - _ENUM: 0
+    - _Filp: 0
+    - _Offset01_X: 0.1
+    - _Offset01_Y: 1.35
+    - _Offset02_X: 0.1
+    - _Offset02_X_1: 0
+    - _Offset02_X_2: 0
+    - _Offset02_X_3: 0
+    - _Offset02_Y: 1.35
+    - _Offset02_Y_1: 0
+    - _Offset02_Y_2: 0
+    - _Offset02_Y_3: 0
+    - _Offset03_X: 0
+    - _Offset03_Y: 0
+    - _Offset04_X: 0
+    - _Offset04_Y: 0
+    - _Offset05_X: 0
+    - _Offset05_Y: 0
+    - _Offset_X: 0.02
+    - _Offset_Y: 0.18
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Speed: 0
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _WorkflowMode: 1
+    - _XAnimation: 1
+    - _YAnimation: 0
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color01: {r: 1, g: 1, b: 1, a: 0}
+    - _Color02: {r: 1, g: 1, b: 1, a: 0}
+    - _Color02_1: {r: 1, g: 1, b: 1, a: 0}
+    - _Color02_2: {r: 1, g: 1, b: 1, a: 0}
+    - _Color02_3: {r: 1, g: 1, b: 1, a: 0}
+    - _Color03: {r: 1, g: 1, b: 1, a: 0}
+    - _Color04: {r: 1, g: 1, b: 1, a: 0}
+    - _Color05: {r: 1, g: 1, b: 1, a: 0}
+    - _Offset01: {r: 0, g: 0, b: 0, a: 0}
+    - _Offset01_X: {r: 0, g: 0, b: 0, a: 0}
+    - _Offset01_Y: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling: {r: 6, g: 2, b: 0, a: 0}
+    - _Tiling01: {r: 2, g: 1, b: 0, a: 0}
+    - _Tiling02: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling02_1: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling02_2: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling02_3: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling03: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling04: {r: 1, g: 1, b: 0, a: 0}
+    - _Tiling05: {r: 1, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []

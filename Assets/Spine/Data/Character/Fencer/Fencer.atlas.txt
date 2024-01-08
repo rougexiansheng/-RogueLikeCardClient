@@ -1,0 +1,123 @@
+Fencer.png
+size:2048,2048
+filter:Linear,Linear
+pma:true
+scale:0.6
+Damage/05.L  lower armS
+bounds:1911,885,135,177
+Damage/05.L  upper armS
+bounds:1102,1564,120,62
+Damage/05.L  upper armS 03-2
+bounds:1761,1214,285,290
+Damage/05.L  upper armS 04
+bounds:640,596,310,274
+offsets:0,0,312,274
+rotate:180
+Damage/05.L  upper armS 04-2
+bounds:929,504,310,274
+offsets:0,0,312,274
+rotate:180
+Damage/05.R  lower armS02
+bounds:2,436,300,254
+Damage/06.cloak01S
+bounds:14,664,300,459
+rotate:90
+Damage/08.L leg01S
+bounds:418,936,301,723
+rotate:270
+Damage/08.L thigh01S
+bounds:828,1237,228,627
+rotate:90
+Damage/08.L thigh01S02
+bounds:1466,1419,228,627
+rotate:180
+Damage/08.R leg01S
+bounds:1866,466,180,362
+Damage/08.body01S03
+bounds:418,1410,317,636
+rotate:180
+Origin/01.face01
+bounds:751,420,155,202
+Origin/01.face01 L eyebrown
+bounds:119,2017,64,29
+offsets:1,0,65,29
+Origin/01.face01 R eyebrown
+bounds:153,2033,35,13
+offsets:0,0,35,18
+Origin/01.face01 R eyes
+bounds:79,2015,40,31
+offsets:0,0,46,32
+Origin/01.face01L eyes
+bounds:2,1987,77,59
+Origin/01.face02
+bounds:944,1477,157,202
+Origin/01.face03
+bounds:674,1246,155,202
+Origin/01.face04
+bounds:1457,1217,155,202
+Origin/02.face1 L eyes ball
+bounds:187,2030,16,16
+offsets:0,1,16,17
+Origin/02.face1 R eyes ball
+bounds:204,2033,13,13
+Origin/02.hair01-2
+bounds:1350,461,303,286
+rotate:90
+Origin/02.hair02-2
+bounds:895,352,134,263
+Origin/02.hair03-2
+bounds:309,397,226,251
+offsets:15,0,241,251
+Origin/02.hair04-2
+bounds:1550,821,400,496
+offsets:0,0,400,508
+rotate:270
+Origin/02.hair05-2
+bounds:469,803,293,448
+rotate:270
+Origin/02.hair06-2
+bounds:1198,659,268,424
+rotate:90
+Origin/03.weapon
+bounds:667,149,720,496
+Origin/04.palm01
+bounds:521,371,227,185
+Origin/05.L  lower arm
+bounds:1849,1665,163,381
+offsets:130,0,293,381
+Origin/05.L  upper arm
+bounds:1843,1604,120,65
+Origin/05.L  upper arm 03-2
+bounds:2,778,347,290
+Origin/05.L  upper arm 04
+bounds:386,504,307,274
+offsets:0,0,311,274
+rotate:180
+Origin/05.L  upper arm 05
+bounds:842,1889,91,124
+offsets:0,4,98,128
+Origin/05.R  lower arm02
+bounds:1621,617,300,302
+Origin/06.cloak01
+bounds:846,800,300,472
+rotate:90
+Origin/07.neck01
+bounds:2,1813,119,154
+Origin/08.L leg01
+bounds:1059,1078,301,723
+rotate:90
+Origin/08.L thigh01
+bounds:1271,1419,228,627
+Origin/08.R leg01
+bounds:1604,444,180,348
+rotate:90
+Origin/08.R thigh02
+bounds:1681,1407,181,639
+Origin/08.body02
+bounds:625,1457,317,589
+Origin/break
+bounds:886,1620,426,435
+offsets:465,930,1200,1654
+rotate:90
+Origin/man02
+bounds:2,1070,600,976

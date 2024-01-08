@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d9a0fa23d3ce641befee49d8cecb79, type: 3}
+  m_Name: TempleMap_MapData
+  m_EditorClassIdentifier: 
+  mapNumber: 3
+  mapCode: TempleMap
+  normalMap:
+  - {fileID: 4001675609368970752, guid: a02b7c756cbcf2c45b0a83a697d6a3a1, type: 3}
+  - {fileID: 6881655606025039243, guid: bcf7c90ddaa6de5418c351e904a27335, type: 3}
+  - {fileID: 6881655606025039243, guid: dd4f86be0f080cb43b0f778067cac3cb, type: 3}
+  Boss: {fileID: 4242036091889584071, guid: 5d7c1b8a99796774abe5899c48431d41, type: 3}

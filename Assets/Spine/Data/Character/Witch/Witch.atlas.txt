@@ -1,0 +1,208 @@
+Witch.png
+size:2048,2048
+filter:Linear,Linear
+pma:true
+scale:0.5
+damage/4.R chestB
+bounds:1753,765,147,220
+offsets:0,0,147,223
+rotate:90
+damage/5.bodyB
+bounds:1626,1598,254,448
+offsets:0,0,283,448
+damage/6.L thighB
+bounds:98,1188,195,398
+rotate:90
+damage/6.R legB
+bounds:2,881,156,497
+rotate:270
+damage/6.R necklaceB
+bounds:929,1927,13,119
+damage/6.R necklaceB01
+bounds:1975,1456,71,131
+offsets:13,1,84,132
+damage/6.R thighB
+bounds:1484,1244,213,481
+rotate:90
+damage/7.B hatB
+bounds:774,1081,196,100
+damage/7.hatB
+bounds:1213,1001,335,250
+rotate:180
+damage/8.B skirtB
+bounds:850,1492,393,554
+damage/8.L skirtB
+bounds:649,832,85,457
+offsets:0,344,241,801
+rotate:90
+damage/8.R skirtB
+bounds:2,1023,146,570
+rotate:90
+original/2.face01
+bounds:687,717,141,174
+rotate:90
+original/2.face01 L eyes
+bounds:242,2016,42,30
+offsets:0,0,43,30
+original/2.face01 L eyes ball
+bounds:396,2027,19,19
+original/2.face01 R eyes
+bounds:159,2009,47,37
+offsets:2,0,50,37
+original/2.face01 R eyes ball
+bounds:203,2030,16,16
+original/2.face02
+bounds:193,758,141,174
+rotate:90
+original/2.face02 L eyes
+bounds:57,1997,48,49
+offsets:1,2,50,51
+original/2.face02 L eyes ball
+bounds:375,2027,20,19
+original/2.face02 R eyes
+bounds:284,2017,37,29
+offsets:2,0,40,38
+original/2.face03
+bounds:1238,1872,141,174
+rotate:180
+original/2.face04
+bounds:1214,752,141,174
+rotate:90
+original/3.hair F
+bounds:1442,936,333,366
+rotate:90
+original/3.hair01
+bounds:423,742,250,239
+original/3.hair02
+bounds:207,1985,33,61
+offsets:2,0,35,61
+original/3.hair03
+bounds:965,641,138,250
+rotate:90
+original/3.hair04
+bounds:1157,643,161,250
+rotate:270
+original/3.hair05
+bounds:2,634,150,136
+rotate:180
+original/3.hair06
+bounds:788,648,133,200
+rotate:90
+original/3.hair07
+bounds:1425,844,149,392
+offsets:0,0,156,400
+rotate:270
+original/3.hair08
+bounds:1060,849,203,400
+rotate:270
+original/3.hair09
+bounds:829,1393,98,350
+rotate:90
+original/3.hair10
+bounds:1825,1646,219,400
+original/3.hair11
+bounds:863,759,93,350
+rotate:90
+original/3.hair12
+bounds:1679,897,232,350
+rotate:90
+original/3.hair13
+bounds:1252,1707,120,200
+original/4.L chest
+bounds:781,1831,147,215
+offsets:4,0,151,230
+original/4.R chest
+bounds:1532,742,147,220
+offsets:0,0,147,223
+rotate:90
+original/5.L lower arm
+bounds:1931,707,112,236
+rotate:180
+original/5.L upper arm
+bounds:334,966,58,246
+rotate:90
+original/5.R lower arm02
+bounds:1880,1581,105,240
+offsets:0,0,110,240
+original/5.R upper arm02
+bounds:1922,1274,124,185
+offsets:0,0,135,185
+original/5.body
+bounds:1429,1598,254,448
+offsets:0,0,283,448
+rotate:180
+original/5.body03
+bounds:2,1974,56,72
+original/6.L leg
+bounds:1642,1030,220,398
+rotate:270
+original/6.L necklace
+bounds:1095,1919,71,127
+offsets:21,2,92,129
+original/6.L necklaceS
+bounds:432,1855,73,112
+offsets:5,0,78,112
+original/6.L thigh
+bounds:270,1092,195,398
+rotate:270
+original/6.R leg
+bounds:555,977,156,497
+rotate:90
+original/6.R necklace
+bounds:2,1290,172,90
+original/6.R necklace S
+bounds:870,1203,168,94
+offsets:0,2,168,98
+original/6.R thigh
+bounds:1494,1384,213,481
+rotate:270
+original/7.B hat
+bounds:1381,695,250,128
+rotate:180
+original/7.eyeball01
+bounds:322,2018,28,28
+original/7.eyeball02
+bounds:97,2037,7,9
+original/7.eyeball03
+bounds:2,2037,9,9
+original/7.eyeball04
+bounds:46,2032,15,14
+original/7.eyeball05
+bounds:417,2032,15,14
+original/7.eyeball06
+bounds:352,2024,22,22
+original/7.eyeswhites
+bounds:108,1991,50,55
+original/7.hat
+bounds:916,1008,400,299
+rotate:180
+original/8.B skirt
+bounds:2,1378,536,668
+original/8.L skirt
+bounds:685,1130,296,798
+offsets:0,3,363,801
+rotate:270
+original/8.R skirt
+bounds:573,906,143,496
+rotate:90
+original/9.weapon down
+bounds:8,676,118,600
+rotate:90
+original/9.weapon light
+bounds:339,1398,146,151
+offsets:4,0,150,151
+original/9.weapon1_3
+bounds:1159,1320,339,726
+offsets:11,24,360,750
+original/9.weapon2
+bounds:1666,697,212,102
+offsets:0,1,212,109
+original/9.weapon3
+bounds:506,702,198,119
+original/爆衣
+bounds:2,790,200,179
+offsets:0,1,200,180
+rotate:180
+original/爆衣整身
+bounds:398,1272,450,774
+rotate:180

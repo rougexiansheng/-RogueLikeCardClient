@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d9a0fa23d3ce641befee49d8cecb79, type: 3}
+  m_Name: GoblinMap_MapData
+  m_EditorClassIdentifier: 
+  mapNumber: 4
+  mapCode: GoblinMap
+  normalMap:
+  - {fileID: 4331645523500774107, guid: 9737b9b5157ffa64cb304501e6b60437, type: 3}
+  - {fileID: 3798297177342656595, guid: fdc84ab4c018cb349be31d88c827bcd6, type: 3}
+  - {fileID: 5146540709420785668, guid: 46bf3187390627b4b975c4a6ea7487ed, type: 3}
+  Boss: {fileID: 2879558034367573177, guid: ff504b5d1549069429657bab39f9bb35, type: 3}

@@ -1,0 +1,37 @@
+# Amazing Assets - Terrain To OBJ
+# File Created: 30/10月/2023 11:24:35
+
+
+#
+# object Grassland02
+#
+
+v 0 0 0
+
+v 0 0 50
+v -80 0 0
+v -80 0 50
+# 4 vertices
+
+vn 0 1 0
+
+vn 0 1 0
+vn 0 1 0
+vn 0 1 0
+# 4 normals
+
+vt 0 0 0
+
+vt 0 1 0
+vt 1 0 0
+vt 1 1 0
+# 4 texture coords
+
+o Grassland02
+g Grassland02
+f 3/3/3 4/4/4 1/1/1
+
+f 4/4/4 2/2/2 1/1/1
+# 2 faces
+
+

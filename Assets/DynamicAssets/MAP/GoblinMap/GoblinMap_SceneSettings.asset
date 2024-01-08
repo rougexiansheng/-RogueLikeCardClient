@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88f68749325ab18479f943ab8f8e9dca, type: 3}
+  m_Name: GoblinMap_SceneSettings
+  m_EditorClassIdentifier: 
+  sceneName: Map04
+  sceneCode: Map04
+  skyBox: {fileID: 2100000, guid: 4fd2d873f45e7644b80d9225e3567711, type: 2}
+  fogColor: {r: 0.7176471, g: 0.6509804, b: 0.57254905, a: 1}
+  fogMode: 1
+  fogDensityStart: 30
+  fogDensityEnd: 85
+  lightGroup_Prefab: {fileID: 2192141609853367800, guid: 480adcf640ba97d40a33235628383e3a,
+    type: 3}
+  BG_Prefab: {fileID: 2028322222438677901, guid: 9b85132e228600b4295c9778fe2a661d,
+    type: 3}

@@ -1,0 +1,8 @@
+GreenSlime.png
+size:1024,1024
+filter:Linear,Linear
+pma:true
+Shadow
+bounds:2,61,520,89
+綠史萊姆01
+bounds:2,152,506,370

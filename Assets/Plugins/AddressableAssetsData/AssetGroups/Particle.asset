@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Particle
+  m_EditorClassIdentifier: 
+  m_GroupName: Particle
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 59fa8cbfe22e67e46b715648ec945f14
+  m_SerializeEntries:
+  - m_GUID: 76fc5b6440589a74b9b932e09e51cd0b
+    m_Address: Assets/DynamicAssets/VFX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e555d53803f248f4399d5f2a97ad2847, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 4d2fcb5226d5c304f8fd02433653860e, type: 2}
+    - {fileID: 11400000, guid: b2ed7806521821c40a4fdc964143ca27, type: 2}

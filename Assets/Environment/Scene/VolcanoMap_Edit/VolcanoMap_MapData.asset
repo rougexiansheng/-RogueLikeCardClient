@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d9a0fa23d3ce641befee49d8cecb79, type: 3}
+  m_Name: VolcanoMap_MapData
+  m_EditorClassIdentifier: 
+  mapNumber: 2
+  mapCode: VolcanoMap
+  normalMap:
+  - {fileID: 4001675609368970752, guid: d9e8a47d513398141836e90abea0abd0, type: 3}
+  - {fileID: 6881655606025039243, guid: 020fb8eb45f54d346be5b54c984368a5, type: 3}
+  - {fileID: 6881655606025039243, guid: 4059c0863f6bca946a6c9a8c5229e18d, type: 3}
+  Boss: {fileID: 4242036091889584071, guid: b714b3e04e3e4604b86f015323c9738a, type: 3}

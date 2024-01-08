@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d9a0fa23d3ce641befee49d8cecb79, type: 3}
+  m_Name: GrasslandMap_MapData
+  m_EditorClassIdentifier: 
+  mapNumber: 1
+  mapCode: GrasslandMap
+  normalMap:
+  - {fileID: 4114706400357557946, guid: cf017b9378e18614a8467b58bb5532c6, type: 3}
+  - {fileID: 2521740658529993753, guid: 34fff86b4efebf6408f6eba4f5720ce1, type: 3}
+  - {fileID: 5859399524397672173, guid: a0687f5f627a0d549970b49a933b3858, type: 3}
+  Boss: {fileID: 796463377127251185, guid: cd784efd047839148a8447000638e47e, type: 3}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Icon
+  m_EditorClassIdentifier: 
+  m_GroupName: Icon
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 7b7179a92460488439e786527b15a88f
+  m_SerializeEntries:
+  - m_GUID: 5d668195d4c884048a69bffe2f0de17b
+    m_Address: Assets/DynamicAssets/UI/Icon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 132534971d872d44e913afe32a09ea30
+    m_Address: Assets/DynamicAssets/UI/SceneNames
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e555d53803f248f4399d5f2a97ad2847, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: bf1ce14ca207bed47aedbbcee6f6a094, type: 2}
+    - {fileID: 11400000, guid: 92cf9872d3c8cd04fac6ee901f8f44cf, type: 2}
