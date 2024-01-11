@@ -80,7 +80,8 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
                     item = itemManager.GetViewItemData(ViewItemType.ItemData, itemList[i].id);
                     item.count = itemList[i].count;
                 }
-
+                item.coinPrice = 0;
+                item.Insufficient = false;
                 item.ItemTypeStr = "寶箱";
                 itemDataList.Add(item);
 
