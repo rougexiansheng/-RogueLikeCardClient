@@ -4007,7 +4007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enableSafeArea: 0
-  DungeonGroupId: 2
+  DungeonGroupId: 1
   charNameText: {fileID: 1200772474120371951}
   chooseSkillGroupButton: {fileID: 187391978920408898}
   startButton: {fileID: 3279512526481616882}

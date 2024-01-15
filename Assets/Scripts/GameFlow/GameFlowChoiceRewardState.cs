@@ -105,7 +105,7 @@ public class GameFlowChoiceRewardState : BaseState<GameFlowController, GameFlowC
                     if (selectItemData != null)
                     {
                         var skill = await uIManager.OpenUI<UISkill>();
-                        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetSortedActorSkillList(), selectItemData.id);
+                        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetOriginalSKillList(), selectItemData.id);
                         var isChange = await skill.IsSkillsChange();
                         if (isChange)
                         {

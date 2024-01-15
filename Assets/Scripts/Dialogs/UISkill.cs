@@ -57,7 +57,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     private float fadeInTime = 0.4f;
     private int scrollRectCount;
     private int groupHeadIndex = 0;
-    private List<int> skillIDList = new List<int>();
+    private List<ActorSkill> skillIDList = new List<ActorSkill>();
     private List<Vector3> displayPositionList = new List<Vector3>();
     private int changeID;
 
@@ -104,11 +104,14 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
         CommonPageFadeIn();
 
-        await createSkillBar(skillList);
-        showCenterSkillInfo(SkillInfoPage.infoItem);
+        await createSkillBar(actorSkills);
         addEndDragListener(showCenterSkillInfo, SkillInfoPage.infoItem);
         dragEventTriggerInit();
         addDragListener(UpdateMarkPosition);
+        SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
+        SwipeScrollRect.ToCenter();
+        showTargetIndexSkill(SkillInfoPage.infoItem, 0);
+        UpdateMarkPosition();
     }
 
 
@@ -136,13 +139,15 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         });
 
         CommonPageFadeIn();
-        await createSkillBar(IDList);
-        showCenterSkillInfo(chagneSkillPage.CurrentInfoItem);
+        await createSkillBar(skills);
         SetupUpdateSkillBlock(chagneSkillPage.UpdateSkillInfo);
         addEndDragListener(showCenterSkillInfo, chagneSkillPage.CurrentInfoItem);
         addEndDragListener(SetupUpdateSkillBlock, chagneSkillPage.UpdateSkillInfo);
         dragEventTriggerInit();
         addDragListener(UpdateMarkPosition);
+        SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
+        SwipeScrollRect.ToCenter();
+        showTargetIndexSkill(chagneSkillPage.CurrentInfoItem, 0);
     }
 
     /// <summary>
@@ -199,7 +204,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// </summary>
     /// <param name="skills"></param>
     /// <returns></returns>
-    private async UniTask createSkillBar(List<int> skills)
+    private async UniTask createSkillBar(List<ActorSkill> skills)
     {
         clearDisplayIcon();
         setScrollRectData(skills);
@@ -224,15 +229,15 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, top);
     }
 
-    private async UniTask createDisplayIcon(List<int> skills)
+    private async UniTask createDisplayIcon(List<ActorSkill> skills)
     {
         List<Transform> iconTransforms = new List<Transform>();
-        foreach (var id in skills)
+        foreach (var skill in skills)
         {
-            var skillData = dataTableManager.GetSkillDefine(id);
+            var skillData = dataTableManager.GetSkillDefine(skill.skillId);
             var icon = Instantiate(displayprefab).GetComponent<UISkillDisplayItem>();
             icon.transform.SetParent(displayIconContent.transform, false);
-            icon.Init(id, skillData.icon);
+            icon.Init(skill.skillId, skillData.icon);
             iconTransforms.Add(icon.transform);
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
@@ -266,7 +271,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         SwipeScrollRect.totalCount = -1;
     }
 
-    private void setScrollRectData(List<int> skills)
+    private void setScrollRectData(List<ActorSkill> skills)
     {
         skillIDList = skills;
         scrollRectCount = skills.Count;
@@ -285,7 +290,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     public void ProvideData(Transform transform, int idx)
     {
         int index = transformIndexNumber(idx);
-        int skillID = skillIDList[index];
+        int skillID = skillIDList[index].skillId;
         var skillData = dataTableManager.GetSkillDefine(skillID);
         var item = transform.GetComponent<UISkillSwipeItem>();
         item.Init(index, skillData.icon);
@@ -370,7 +375,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     private void showCenterSkillInfo(UISkillInfo target)
     {
         int currentIndex = transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter());
-        var id = skillIDList[currentIndex];
+        var id = skillIDList[currentIndex].skillId;
+        target.Init(id);
+    }
+
+    private void showTargetIndexSkill(UISkillInfo target, int index)
+    {
+        var id = skillIDList[index].skillId;
         target.Init(id);
     }
 
@@ -383,12 +394,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
         chagneSkillPage.ResetStateUI();
         int currentIndex = transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter());
-        int centerID = skillIDList[currentIndex];
+        int centerID = skillIDList[currentIndex].skillId;
 
         switch (skillManager.GetSkillChangeState(centerID, changeID))
         {
             case SkillChangeStateEnum.LevelUp:
                 int levelupID = skillManager.GetLeveUpID(centerID);
+                // await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetSortedActorSkillList();
                 var levelupIsUse = saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetData(currentIndex).isUsed;
                 if (levelupID == -1)
                 {
@@ -532,7 +544,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                 setupManaPool(group.Skills);
                 RemoveAllDragEventTrigger();
 
-                await createSkillBar(group.Skills);
+                await createSkillBar(ChangeToActorSKills(group.Skills));
                 addDragListener(UpdateMarkPosition);
                 chooseSkillSetPage.TurnOnAllSetItemButton();
             }, i);
@@ -686,6 +698,22 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
             Destroy(item.gameObject);
         }
         skillItemsList.Clear();
+    }
+
+    public List<ActorSkill> ChangeToActorSKills(List<int> intList)
+    {
+        var list = new List<ActorSkill>();
+        // 對 Dictionary 的鍵進行排序並提取值
+        for (int i = 0; i < intList.Count; i++)
+        {
+            list.Add(new ActorSkill()
+            {
+                skillId = intList[i],
+                isUsed = false,
+                originIndex = i,
+            });
+        }
+        return list;
     }
     /// <summary>
     /// 把 ActorSkill List轉為 Int List

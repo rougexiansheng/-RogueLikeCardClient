@@ -105,4 +105,20 @@ public class NetworkSaveBattleSkillContainer : NetworkSaveContainerBase
         }
         return list.ToList();
     }
+
+    public List<ActorSkill> GetOriginalSKillList()
+    {
+        var list = new ActorSkill[m_datas.Count];
+        // 對 Dictionary 的鍵進行排序並提取值
+        foreach (var v in m_datas.Values)
+        {
+            list[v.index] = new ActorSkill()
+            {
+                skillId = v.skillId,
+                isUsed = false,
+                originIndex = v.index,
+            };
+        }
+        return list.ToList();
+    }
 }
