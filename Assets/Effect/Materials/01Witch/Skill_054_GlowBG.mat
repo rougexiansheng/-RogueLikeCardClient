@@ -11,8 +11,7 @@ Material:
   m_Shader: {fileID: 4800000, guid: b430983578466934c944e7171b4c372c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - ADDITIVECONFIG_ON
+  m_ValidKeywords: []
   m_InvalidKeywords:
   - _COLORADDSUBDIFF_ON
   - _EMISSION
@@ -198,7 +197,7 @@ Material:
     - _DistortionStrengthScaled: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _DstMode: 1
+    - _DstMode: 10
     - _EditorDrawers: 61
     - _EmissionEnabled: 0
     - _EnvironmentReflections: 1
@@ -238,7 +237,7 @@ Material:
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
     - _ReceiveShadows: 1
-    - _RenderingMode: 5
+    - _RenderingMode: 0
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0
@@ -302,7 +301,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _SrcMode: 1
+    - _SrcMode: 5
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -335,7 +334,7 @@ Material:
     - _BaseColor: {r: 0, g: 0.015245438, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.43778226, g: 0.2953008, b: 0.7924528, a: 0.29803923}
+    - _Color: {r: 0.3117027, g: 0, b: 0.33962262, a: 1}
     - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
