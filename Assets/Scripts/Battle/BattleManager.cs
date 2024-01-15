@@ -85,7 +85,7 @@ public class BattleManager : IInitializable
         player.colors.Clear();
     }
 
-    public async UniTask SetMonsterActor(List<int> posAndId)
+    public async UniTask SetMonsterActor(List<int> posAndId, List<List<SDKProtocol.ItemData>> acquisitionItems)
     {
         monsters.Clear();
         if (posAndId == null)
@@ -97,6 +97,7 @@ public class BattleManager : IInitializable
             tLs.Add(preloadManager.PreloadMonsterSpineAndParticle(posAndId[i]));
             var monster = monsterManager.GainMonsterActor(posAndId[i]);
             monster.monsterPos = (BattleActor.MonsterPositionEnum)i;
+            monster.acquisitionList = acquisitionItems[i];
             monsters.Add(monster);
         }
         await UniTask.WhenAll(tLs);
@@ -122,7 +123,8 @@ public class BattleManager : IInitializable
                 {
                     //確定死亡並移出
                     monsters.Remove(m);
-
+                    mRemoveData.monsterID = m.monsterId;
+                    mRemoveData.acquisitionList = m.acquisitionList;
                     mRemoveData.positions.Add(ls[i].monsterPos);
                     passiveManager.OnActorPassive(m, PassiveTriggerEnum.OnDeadAndRemoveAfter);
                 }

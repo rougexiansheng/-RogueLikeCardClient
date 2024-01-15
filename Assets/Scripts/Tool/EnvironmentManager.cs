@@ -16,6 +16,9 @@ public class EnvironmentManager : IInitializable, ITickable
     PassiveManager passiveManager;
     [Inject]
     DataTableManager dataTableManager;
+    [Inject]
+    AssetManager assetManager;
+
 
     List<GameObject> sceneGameObjects = new List<GameObject>();
     GameObject baseEmptyObj;
@@ -277,7 +280,7 @@ public class EnvironmentManager : IInitializable, ITickable
             SetSpineMonsterColor(currentPos);
             SetMonsterPointOrder(currentPos);
             return;
-        } 
+        }
         isModify = true;
         float angle = 0;
         if (positionEnum == BattleActor.MonsterPositionEnum.Left) angle = monsterAngle;
@@ -382,6 +385,7 @@ public class EnvironmentManager : IInitializable, ITickable
     }
     public async UniTask MonsterRemove(PMonsterRemoveData removeData)
     {
+        //移除怪物
         var tLs = new List<UniTask>();
         for (int i = 0; i < removeData.positions.Count; i++)
         {
@@ -389,6 +393,37 @@ public class EnvironmentManager : IInitializable, ITickable
             tLs.Add(mp.MonsterRemove());
         }
         await UniTask.WhenAll(tLs);
+
+        //表演掉落
+        var acqLs = new List<UniTask>();
+        List<UIItemIcon> itemIcons = new List<UIItemIcon>();
+        for (int i = 0; i < removeData.positions.Count; i++)
+        {
+            foreach (var icon in removeData.acquisitionList)
+            {
+                var uiDropItem = assetManager.GetObject<UIItemIcon>();
+
+                uiDropItem.transform.SetParent(monsterPoints[(int)removeData.positions[i]].transform, false);
+                uiDropItem.transform.localRotation = Quaternion.identity;
+                uiDropItem.transform.position = monsterPoints[(int)removeData.positions[i]].spinePoint.position;
+                uiDropItem.SetIcon(dataTableManager.GetItemDataDefine(icon.id).icon);
+                itemIcons.Add(uiDropItem);
+                acqLs.Add(uiDropItem.DropAnimation());
+            }
+
+        }
+        await UniTask.WhenAll(acqLs);
+        //回收 ItemIcon
+        foreach (var icon in itemIcons)
+        {
+            assetManager.ReturnObjToPool(icon.gameObject);
+        }
+        //關閉 Monster Poiont 
+        for (int i = 0; i < removeData.positions.Count; i++)
+        {
+            monsterPoints[(int)removeData.positions[i]].Active(false);
+        }
+
         //沒有怪物相機回到正中間
         for (int i = 0; i < monsterPoints.Length; i++)
         {

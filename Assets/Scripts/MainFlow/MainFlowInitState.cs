@@ -23,6 +23,9 @@ public class MainFlowInitState : BaseState<MainFlowController, MainFlowControlle
     [Inject]
     PreloadManager preloadManager;
 
+    [Inject]
+    AssetManager assetManager;
+
     public override UniTask End()
     {
         return default;
@@ -40,6 +43,14 @@ public class MainFlowInitState : BaseState<MainFlowController, MainFlowControlle
         await uIManager.FadeIn(0);
         uIManager.LoadingUI(true);
 
+        await UniTask.WhenAll(
+           // é å…ˆè¼‰å…¥UI
+           uIManager.PreloadUI(
+           typeof(UISkillPopupInfoPage),
+           typeof(UISkill)
+           )
+           );
+
         await dataTableManager.LoadMainTable();
         GetController().PlayLocalBgm(AssetManager.LocalBGMEnum.Lobby);
         GetController().Trigger(MainFlowController.MainFlowState.Download);
@@ -51,8 +62,8 @@ public class MainFlowInitState : BaseState<MainFlowController, MainFlowControlle
     }
 
     /// <summary>
-    /// ¶}µo´ú¸Õ¨Ï¥Î
-    /// §Þ¯à/³Q°Ê ­«·s¸ü¤J
+    /// ï¿½}ï¿½oï¿½ï¿½ï¿½Õ¨Ï¥ï¿½
+    /// ï¿½Þ¯ï¿½/ï¿½Qï¿½ï¿½ ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½J
     /// </summary>
     public async UniTask Reload()
     {

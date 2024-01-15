@@ -148,6 +148,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
         SwipeScrollRect.ToCenter();
         showTargetIndexSkill(chagneSkillPage.CurrentInfoItem, 0);
+        UpdateMarkPosition();
     }
 
     /// <summary>
