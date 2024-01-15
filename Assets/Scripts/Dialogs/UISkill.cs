@@ -105,10 +105,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         CommonPageFadeIn();
 
         await createSkillBar(actorSkills);
-        showCenterSkillInfo(SkillInfoPage.infoItem);
         addEndDragListener(showCenterSkillInfo, SkillInfoPage.infoItem);
         dragEventTriggerInit();
         addDragListener(UpdateMarkPosition);
+        SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
+        SwipeScrollRect.ToCenter();
+        showTargetIndexSkill(SkillInfoPage.infoItem, 0);
+        UpdateMarkPosition();
     }
 
 
@@ -137,12 +140,14 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
         CommonPageFadeIn();
         await createSkillBar(skills);
-        showCenterSkillInfo(chagneSkillPage.CurrentInfoItem);
         SetupUpdateSkillBlock(chagneSkillPage.UpdateSkillInfo);
         addEndDragListener(showCenterSkillInfo, chagneSkillPage.CurrentInfoItem);
         addEndDragListener(SetupUpdateSkillBlock, chagneSkillPage.UpdateSkillInfo);
         dragEventTriggerInit();
         addDragListener(UpdateMarkPosition);
+        SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
+        SwipeScrollRect.ToCenter();
+        showTargetIndexSkill(chagneSkillPage.CurrentInfoItem, 0);
     }
 
     /// <summary>
@@ -371,6 +376,12 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     {
         int currentIndex = transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter());
         var id = skillIDList[currentIndex].skillId;
+        target.Init(id);
+    }
+
+    private void showTargetIndexSkill(UISkillInfo target, int index)
+    {
+        var id = skillIDList[index].skillId;
         target.Init(id);
     }
 

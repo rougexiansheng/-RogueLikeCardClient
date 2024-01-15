@@ -159,7 +159,7 @@ public class UIViewItem : MonoBehaviour
     private async UniTask OpenSkillUi(int skillId)
     {
         var skill = await uIManager.OpenUI<UISkill>();
-        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetSortedActorSkillList(), skillId);
+        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetOriginalSKillList(), skillId);
         var isChange = await skill.IsSkillsChange();
         if (isChange)
         {
