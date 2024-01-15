@@ -277,19 +277,31 @@ public class PreloadManager
             var data = dataTableManager.GetProfessionDataDefine(professionEnum);
             var ls = await UniTask.WhenAll(
                 assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.prefabName}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine1}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine2}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine3}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine4}.prefab"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.attackSound}"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.hitSound}"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.clickSound}"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.damageSound}"),
-                assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.ultimateSound}")
+                assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.ultimateSound}"),
+                assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.cgSound1}"),
+                assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.cgSound2}")
                 );
             var obj = ls.Item1;
             data.spineCharacter = obj.GetComponent<SpineCharacterCtrl>();
-            data.attackSound = ls.Item2;
-            data.hitSound = ls.Item3;
-            data.clickSound = ls.Item4;
-            data.damageSound = ls.Item5;
-            data.ultimateSound = ls.Item6;
+            data.cgSpine1 = ls.Item2.GetComponent<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine2 = ls.Item3.GetComponent<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine3 = ls.Item4.GetComponent<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine4 = ls.Item5.GetComponent<Spine.Unity.SkeletonGraphic>();
+            data.attackSound = ls.Item6;
+            data.hitSound = ls.Item7;
+            data.clickSound = ls.Item8;
+            data.damageSound = ls.Item9;
+            data.ultimateSound = ls.Item10;
+            data.cgSound1 = ls.Item11;
+            data.cgSound2 = ls.Item12;
         }
     }
     #endregion

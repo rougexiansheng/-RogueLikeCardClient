@@ -57,46 +57,33 @@ public class DataTableManager
         /// </summary>
         var ls = new UniTask[]
         {
-            //LoadServerDefineData<SkillOriginDefine>("1Di3DQWobQzLu2jT_TbhfJa6eYnVTwI4b6H4BSZArYnU", "SkillData", // 技能
             LoadServerDefineData<SkillOriginDefine>("1rweUPAs7W2Y7msmbONWBn0nFeV-cJXJwzK60BTIEa-s", "SkillData", // 技能
             (dalaList)=>{ GetGroupTableDictionary(dalaList, out skillDefineDic, out skillGroupDefineDic, preloadManager.SetSkillOriginlDefineDic); }),
-            //LoadServerDefineData<PassiveOriginDefine>("1vDOa2zw-x0Ji0JBXpeQ2rFK79p8oTaH6mVPUX-e_TrA", "PassiveData", //被動
             LoadServerDefineData<PassiveOriginDefine>("1trU-VVq7Q4EPC2gWdq_Z4a98Rh92CJIQbQjPSBgibqI", "PassiveData", //被動
             (dalaList)=>{ GetGroupTableDictionary(dalaList, out passiveDefineDic, out passiveGroupDefineDic, preloadManager.SetPassiveOriginlDefineDic); }),
-            //LoadServerDefineData<MonsterOriginDefine>("1qJBfcU93LaKrBC7hq9Cs2xFvAzj_snDV1SCeUUrcJro", "MonsterData", // 怪物
             LoadServerDefineData<MonsterOriginDefine>("1sgi7O_O2bM0JORT5NCl_ZHYd7Hb9q20RHakm3ZMC70A", "MonsterData", // 怪物
             (dalaList)=>{ GetTableDictionary(dalaList, out monsterDataDic, preloadManager.SetMonsterOriginlDefineDic); }),
-            //LoadServerDefineData<MonsterAIOriginDefine>("1rnzNNZCFeE9QEzK3aCkXcUAR8tG7aX8UAynAEU0jEkI", "MonsterAIData", // 怪物AI
             LoadServerDefineData<MonsterAIOriginDefine>("1678qhd7-rfO9zKwvhxjCv2_tuBC1_Do58sFcizE15dI", "MonsterAIData", // 怪物AI
             (dalaList)=>{ GetTableDictionary(dalaList, out monsterAIDic); }),
-            //LoadServerDefineData<MonsterGroupOriginDataDefine>("1eK3BILCBe9BnpJvgnUsbMX0GheBhbaWYWnzvT2WX-g4", "MonsterGroupData", //怪物隨機群組
             LoadServerDefineData<MonsterGroupOriginDataDefine>("1ESzW8srCPQLgMcD98CjW7a3UW-KmGWrzV_E3RUHKE0s", "MonsterGroupData", //怪物隨機群組
             (dalaList)=>{ GetTableDictionary(dalaList, out monsterGroupDic); }),
-            //LoadServerDefineData<DungeonOriginListDefine>("1WpB2z9Ez5I-Xsxw4-pEeU8o1ohu6E1y38Imf-fy9sQ4","DungeonList", //地圖表
             LoadServerDefineData<DungeonOriginListDefine>("1ud_ciPiBx5C_xQiqqRLey_ffL8JEacW__oZdkM3gLwQ","DungeonList", //地圖表
             (dalaList)=>{ GetTableDictionary(dalaList, out dungeonListDic, preloadManager.SetDungeonOriginlListDefineDic); }),
-            //LoadServerDefineData<DungeonOriginDataDefine>("1K3Py-BGP8sg4_8hA6yEd-2UsYb927Fpn_UO_FtjHWPU","DungeonData", //地圖
             LoadServerDefineData<DungeonOriginDataDefine>("1q0MTpxB3Qn200bc0NNAGu5DBcqkUH0akh7FdNMKWQLA","DungeonData", //地圖
             (dalaList)=>{
                 GetTableDictionary(dalaList, out dungeonDataDic, preloadManager.SetDungeonOriginlDefineDic);
                 GetDungeonGroupDictionary(dungeonDataDic, out dungeonGroupDataDic);
             }),
-            //LoadServerDefineData<SceneDataOriginDefine>("1g4B1Iqq3b4gAP4Q3FY-wCvqmbFyZDZzKJTYEeGd8kpQ","SceneData", //場景定義
             LoadServerDefineData<SceneDataOriginDefine>("1NjnDxJU4EEQayHi0D21cVmD30D-M1KGg9okT6vh_Rig","SceneData", //場景定義
             (dalaList)=>{ GetTableDictionary(dalaList, out SceneDataDic, preloadManager.SetSceneOriginlDefineDic); }),
-            //LoadServerDefineData<DropItemOriginDataDefine>("16OMY5UL1NJ7xdwIm5r2tvqQdvZpbACPSjQrOhKJcigM","DropData", //掉落群組
             LoadServerDefineData<DropItemOriginDataDefine>("1FNhzgY55JQX8y0OlzG0F6GdnxcfvwKfg-rDb9D6givk","DropData", //掉落群組
             (dalaList)=>{ GetDropItemGroupDictionary(dalaList, out dropGroupDataDic); }),
-            //LoadServerDefineData<ItemOriginDataDefine>("1H9rbyvisQ9PqvRm172FiLLjpwpCEalSpCxtfIIQpe8U","ItemData", //道具
             LoadServerDefineData<ItemOriginDataDefine>("1_055jVAta4JzQ87FeuiIeNm4Bt3lwCgsNeURA9KRMiA","ItemData", //道具
             (dalaList)=>{ GetTableDictionary(dalaList, out itemDataDic, preloadManager.SetItemOriginlDefineDic); }),
-            //LoadServerDefineData<ProfessionOriginDataDefine>("1DXe6Plj5yMqw0j-tG6V0zxf9sAp_PUWUf1Me1IX33CA","ProfessionData", //角色
 			LoadServerDefineData<ProfessionOriginDataDefine>("1Gd6G86V2F1-YgNHjBnAigA91sWtvMlHdaYZF6c0W_ic","ProfessionData", //角色
 			(dalaList)=>{ GetTableDictionary(dalaList, out professionDataDic, preloadManager.SetProfessionOriginlDefineDic); }),
-
             LoadServerDefineData<ItemEffectOriginalDefine>("1Z3shgeSoPK_JHzbXpXSub7bOTXiTs4pmnjdJ2lOJbBY","ItemEffectData", //道具效果
             (dalaList)=>{ GetTableDictionary(dalaList, out itemEffectDataDic, preloadManager.SetItemEffectOriginlDefineDic); }),
-            //LoadServerDefineData<ProfessionSkinOriginDataDefine>("1BPND46fFC1J2nAkDEmhlc98i5lJjgJki1LeBP3tn5Ds","ProfessionSkinData", //角色造型
             LoadServerDefineData<ProfessionSkinOriginDataDefine>("1B7rjMjwZCchDXa_IWr6NObG_-LzqjSrx1EwzGKjsJ5c","ProfessionSkinData", //角色造型
             (dalaList)=>{ GetTableDictionary(dalaList, out professionSkinDataDefineDic, preloadManager.SetProfessionSkinOriginlDefineDic); }),
         };

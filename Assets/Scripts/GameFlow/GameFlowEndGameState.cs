@@ -66,7 +66,10 @@ public class GameFlowEndGameState : BaseState<GameFlowController, GameFlowContro
         var level = dataTableManager.GetDungeonDataDefine(dungeonId).mapLayer;
         var spendTime = (int)(battleManager.GetElapsedTime() * 1000);
         var playerName = "";
-
+        // CG UI
+        var cgUI = await uIManager.OpenUI<UICG>();
+        cgUI.Init();
+        await cgUI.PlayerCGAnimation();
         // open remane box ui
         var renameUi = await uIManager.OpenUI<UIRenameBox>();
         await renameUi.Init(onConfirm: (name) =>

@@ -1,3 +1,4 @@
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,14 @@ public class ProfessionDataDefine
     public List<int> prepareSkills = new List<int>();
     public List<int> baseSkills = new List<int>();
     public List<List<int>> selectSkills = new List<List<int>>();
+
+    public SkeletonGraphic cgSpine1;
+    public SkeletonGraphic cgSpine2;
+    public SkeletonGraphic cgSpine3;
+    public SkeletonGraphic cgSpine4;
+
+    public AudioClip cgSound1;
+    public AudioClip cgSound2;
 
     public SpineCharacterCtrl spineCharacter;
     public AudioClip attackSound;
@@ -40,6 +49,12 @@ public class ProfessionOriginDataDefine : OriginDefineBase<ProfessionDataDefine>
     public string selectSkill2;
     public string selectSkill3;
     public string selectSkill4;
+    public string cgSpine1;
+    public string cgSpine2;
+    public string cgSpine3;
+    public string cgSpine4;
+    public string cgSound1;
+    public string cgSound2;
     public int baseHp;
 
     public string attackSound;
