@@ -54,9 +54,9 @@ public class PerformanceMethods
         }
     }
 
-    public UniTask ShowParticle(PShowParticleData particleData)
+   async public UniTask ShowParticle(PShowParticleData particleData)
     {
-        if (particleData.isIgnore) return default;
+        if (particleData.isIgnore) return;
         if (particleData.sound) assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.SoundEffect, particleData.sound);
         if (particleData.particle)
         {
@@ -169,13 +169,14 @@ public class PerformanceMethods
                 if (!updateSuccess) // 儲存失敗，直接銷毀 Particle
                     p.AddStopAction(() => GameObject.DestroyImmediate(p.gameObject));
             }
-
             obj.transform.SetParent(point, false);
+
+            await UniTask.DelayFrame(1);
+
             p.Play();
-            if (particleData.isPassive) return UniTask.Delay(175);
-            if (particleData.needWaitDestroy) return UniTask.WaitUntil(() => obj == null);
+            if (particleData.isPassive) await UniTask.Delay(175);
+            if (particleData.needWaitDestroy) await UniTask.WaitUntil(() => obj == null);
         }
-        return default;
     }
 
     public UniTask MoveCamera(PCameraMoveData moveData)
