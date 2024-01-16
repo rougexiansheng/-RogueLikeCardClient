@@ -34,7 +34,7 @@ public class UISkillInfo : UIBase
 
     public void Init(int id)
     {
-        CloseMamaItem();
+        //CloseMamaItem();
         skillTileText.text = "";
         skillInfoText.text = "";
         currentIndex = 0;

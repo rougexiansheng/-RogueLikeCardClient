@@ -27,43 +27,48 @@ public class UISkillChangePage : MonoBehaviour
     [SerializeField]
     private Image maxLevelIcon;
 
-    public void Init()
-    {
-        RemoveAllListeners();
-        replaceIcon.gameObject.SetActive(false);
-        replaceButton.gameObject.SetActive(false);
-        levelUpIcon.gameObject.SetActive(false);
-        levelUpButton.gameObject.SetActive(false);
-        maxLevelIcon.gameObject.SetActive(false);
+    [SerializeField]
+    private UISkillSwipeItem targetSkill;
 
+    public void Init(Sprite sprite)
+    {
+        targetSkill.gameObject.SetActive(true);
+        RemoveAllListeners();
+        //replaceIcon.gameObject.SetActive(false);
+        replaceButton.gameObject.SetActive(false);
+        //levelUpIcon.gameObject.SetActive(false);
+        levelUpButton.gameObject.SetActive(false);
+        //maxLevelIcon.gameObject.SetActive(false);
+        targetSkill.Icon.sprite = sprite;
     }
+
 
     public void ResetStateUI()
     {
-        replaceIcon.gameObject.SetActive(false);
+        //replaceIcon.gameObject.SetActive(false);
         replaceButton.gameObject.SetActive(false);
-        levelUpIcon.gameObject.SetActive(false);
+        //levelUpIcon.gameObject.SetActive(false);
         levelUpButton.gameObject.SetActive(false);
-        maxLevelIcon.gameObject.SetActive(false);
+        //maxLevelIcon.gameObject.SetActive(false);
         RemoveAllListeners();
     }
 
     public void OpenReplaceUI()
     {
-        replaceIcon.gameObject.SetActive(true);
+        //replaceIcon.gameObject.SetActive(true);
         replaceButton.gameObject.SetActive(true);
     }
 
 
     public void OpenLevelUpUI()
     {
-        levelUpIcon.gameObject.SetActive(true);
+        //levelUpIcon.gameObject.SetActive(true);
         levelUpButton.gameObject.SetActive(true);
     }
 
     public void OpenMaxLevelUI()
     {
-        maxLevelIcon.gameObject.SetActive(true);
+        //maxLevelIcon.gameObject.SetActive(true);
     }
 
     public void AddLevelUpButtonListener(Action action)
