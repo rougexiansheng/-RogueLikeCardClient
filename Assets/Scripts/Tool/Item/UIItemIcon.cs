@@ -17,8 +17,17 @@ public class UIItemIcon : MonoBehaviour
 
     public async UniTask DropAnimation()
     {
-        ((RectTransform)transform).anchoredPosition3D += new Vector3(0, 300, 0);
-        transform.DOLocalMove(new Vector3(1, -120, 0), 0.5f);
+        Vector3 originalPosition = transform.position;
+        ((RectTransform)transform).anchoredPosition3D += new Vector3(0, 200, 0);
+        transform.DOLocalMoveY(-Vector3.Distance(originalPosition, transform.position), 0.15f)
+           .SetEase(Ease.InCubic)
+           .OnComplete(() =>
+           {
+               // 弹跳效果
+               transform.DOJump(transform.position, 1, 1, 0.3f)
+                   .SetEase(Ease.OutQuad);
+           });
+
         await UniTask.Delay(2000);
     }
 
