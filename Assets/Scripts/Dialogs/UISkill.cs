@@ -87,6 +87,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     public async UniTask OpenCheckSkillPage(List<ActorSkill> actorSkills)
     {
         CanLongPress = false;
+
         //測試用
         actorSkills = battleManager.player.skills;
         var skillList = ChangeToSkillIDList(actorSkills);
@@ -108,10 +109,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         addEndDragListener(showCenterSkillInfo, SkillInfoPage.infoItem);
         dragEventTriggerInit();
         addDragListener(UpdateMarkPosition);
-        SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
+        addDragListener(() => { displayIcon.SetActive(true); });
+        addEndDragListener((target) => { displayIcon.SetActive(false); }, null);
+        SwipeScrollRect.ScrollToCell(10, -1);
         SwipeScrollRect.ToCenter();
         showTargetIndexSkill(SkillInfoPage.infoItem, 0);
         UpdateMarkPosition();
+        displayIcon.SetActive(false);
     }
 
 
@@ -124,6 +128,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     public async UniTask OpenChangeSkillPage(List<ActorSkill> skills, int changeSkillID)
     {
         CanLongPress = false;
+
         var IDList = ChangeToSkillIDList(skills);
         //skills = battleManager.player.baseSkills;
         CommonPageFadeOut();
@@ -145,10 +150,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         addEndDragListener(SetupUpdateSkillBlock, chagneSkillPage.UpdateSkillInfo);
         dragEventTriggerInit();
         addDragListener(UpdateMarkPosition);
-        SwipeScrollRect.ScrollToCell((skillIDList.Count / 2) + 1, -1);
+        addDragListener(() => { displayIcon.SetActive(true); });
+        addEndDragListener((target) => { displayIcon.SetActive(false); }, null);
+        SwipeScrollRect.ScrollToCell(10, -1);
         SwipeScrollRect.ToCenter();
         showTargetIndexSkill(chagneSkillPage.CurrentInfoItem, 0);
         UpdateMarkPosition();
+        displayIcon.SetActive(false);
     }
 
     /// <summary>
@@ -159,6 +167,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// <param name="prevGroupsIndex"> last time player choose skill group index </param>
     public void OpenEquipmentSkillPage(List<SDKProtocol.SkillGroup> skillGroups, List<int> unlockSkill, int prevGroupsIndex)
     {
+        displayIcon.SetActive(false);
         chooseGroupIndex = prevGroupsIndex;
         groupHeadIndex = (chooseGroupIndex / 4) * 4;
         totalSkillGroups = skillGroups;
