@@ -128,7 +128,7 @@ public class GameFlowShopState : BaseState<GameFlowController, GameFlowControlle
     private async UniTask OpenSkillUi(int skillId)
     {
         var skill = await uIManager.OpenUI<UISkill>();
-        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetSortedActorSkillList(), skillId);
+        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetOriginalSKillList(), skillId);
         var isChange = await skill.IsSkillsChange();
     }
     public override void Update()

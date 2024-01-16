@@ -7,26 +7,26 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Skill_004_Soul
+  m_Name: Skill_039_Lightening_B
   m_Shader: {fileID: 4800000, guid: b430983578466934c944e7171b4c372c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - ADDITIVECONFIG_ON
+  - GLOW_ON
+  - PREMULTIPLYCOLOR_ON
   m_InvalidKeywords:
-  - _ALPHABLEND_ON
-  - _EMISSION
+  - _COLORADDSUBDIFF_ON
   - _FADING_ON
   - _FLIPBOOKBLENDING_OFF
   - _SOFTPARTICLES_ON
   - _SURFACE_TYPE_TRANSPARENT
-  m_LightmapFlags: 0
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses:
-  - GRABPASS
   - DepthOnly
   - SHADOWCASTER
   m_LockedProperties: 
@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f6963d400478e4541b5839d4e7fb7943, type: 3}
+        m_Texture: {fileID: 2800000, guid: a9104c98a6803d64aa367f3a3463d115, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -58,7 +58,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a9104c98a6803d64aa367f3a3463d115, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FadeBurnTex:
@@ -74,11 +74,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d2383c8a7a34dcf4f8e39a8977e6cbb4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2380811cd25fd12419f4b0059acd1149, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 2800000, guid: 2f6642b43dc405d498acba7e288c068c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape1MaskTex:
@@ -124,7 +128,8 @@ Material:
     - _AlphaStepMax: 0.075
     - _AlphaStepMin: 0
     - _AlphaToMask: 0
-    - _Blend: 2
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 0
     - _BlendOp: 0
     - _BumpScale: 1
     - _CamDistFadeStepMax: 100
@@ -135,10 +140,10 @@ Material:
     - _CameraNearFadeDistance: 1
     - _ColorGradingMidPoint: 0.5
     - _ColorMask: 15
-    - _ColorMode: 0
+    - _ColorMode: 1
     - _ColorRampBlend: 1
     - _ColorRampLuminosity: 0
-    - _Cull: 2
+    - _Cull: 0
     - _CullingOption: 0
     - _Cutoff: 0.5
     - _DebugShape: 1
@@ -156,9 +161,9 @@ Material:
     - _DistortionScrollYSpeed: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
-    - _DstBlend: 1
-    - _DstBlendAlpha: 1
-    - _DstMode: 1
+    - _DstBlend: 10
+    - _DstBlendAlpha: 10
+    - _DstMode: 10
     - _EditorDrawers: 61
     - _EmissionEnabled: 0
     - _FadeAmount: -0.1
@@ -170,8 +175,9 @@ Material:
     - _FadeTransition: 0.075
     - _FlipbookBlending: 0
     - _FlipbookMode: 0
-    - _Glow: 0
-    - _GlowGlobal: 1
+    - _Glossiness: 0
+    - _Glow: 1.5
+    - _GlowGlobal: 2
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 5
     - _HsvBright: 1
@@ -181,6 +187,7 @@ Material:
     - _LightAmount: 0
     - _LightingEnabled: 0
     - _MaskPow: 1
+    - _Metallic: 0
     - _Mode: 4
     - _OffsetSh1: 1
     - _OffsetSh2: 1
@@ -191,6 +198,7 @@ Material:
     - _RandomSh1Mult: 1
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
+    - _ReceiveShadows: 1
     - _RenderingMode: 5
     - _RimAddAmount: 1
     - _RimBias: 0
@@ -246,6 +254,7 @@ Material:
     - _ShapeRotationSpeed: 0
     - _ShapeXSpeed: 0
     - _ShapeYSpeed: 0
+    - _Smoothness: 0
     - _SoftFactor: 0.5
     - _SoftParticlesEnabled: 1
     - _SoftParticlesFarFadeDistance: 1
@@ -253,11 +262,6 @@ Material:
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _SrcMode: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
     - _Surface: 1
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
@@ -267,7 +271,6 @@ Material:
     - _TwistUvPosX: 0.5
     - _TwistUvPosY: 0.5
     - _TwistUvRadius: 0.75
-    - _UseUIAlphaClip: 0
     - _VertOffsetAmount: 0.5
     - _VertOffsetPower: 1
     - _VertOffsetTexXSpeed: 0.1
@@ -277,32 +280,32 @@ Material:
     - _WaveStrength: 7.5
     - _WaveX: 0
     - _WaveY: 0.5
-    - _ZTestMode: 0
+    - _ZTestMode: 4
     - _ZWrite: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _BaseColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _ColorAddSubDiff: {r: 1, g: 0, b: 0, a: 0}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
     - _DepthGlowColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1.0449157, g: 1.0092559, b: 1.5849056, a: 1}
     - _FadeBurnColor: {r: 1, g: 1, b: 0, a: 1}
     - _FrontFaceTint: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _GlowColor: {r: 0, g: 0, b: 0, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _Shape2Color: {r: 1, g: 1, b: 1, a: 1}
     - _Shape3Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ShapeColor: {r: 0.6968824, g: 0.6748243, b: 0.7490196, a: 1}
+    - _ShapeColor: {r: 1, g: 1, b: 1, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 1, b: 0, a: 0}
     - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []
---- !u!114 &3517949391532214563
+--- !u!114 &877980851778317875
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
