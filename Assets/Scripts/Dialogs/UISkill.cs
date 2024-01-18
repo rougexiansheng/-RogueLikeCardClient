@@ -87,7 +87,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// For Check Skill Page
     /// </summary>
     /// <param name="actorSkills"></param>
-    public async UniTask OpenCheckSkillPage(List<ActorSkill> actorSkills)
+    public async UniTask OpenCheckSkillPage(List<ActorSkill> actorSkills, int index = 2)
     {
         CanLongPress = false;
         IsChangePage = false;
@@ -112,10 +112,11 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         addDragListener(UpdateMarkPosition);
         addDragListener(() => { displayIcon.SetActive(true); });
         addEndDragListener(() => { displayIcon.SetActive(false); });
+        SwipeScrollRect.ScrollToCell(10 + index, -1);
         SwipeScrollRect.ToCenter();
-        var swipeItem = GetSwipeItemFromScrollRect(2);
+        var swipeItem = GetSwipeItemFromScrollRect(index);
         swipeItem.UpPerformace();
-        showTargetIndexSkill(SkillInfoPage.infoItem, 2);
+        showTargetIndexSkill(SkillInfoPage.infoItem, index);
         UpdateMarkPosition();
         displayIcon.SetActive(false);
     }

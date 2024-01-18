@@ -204,7 +204,7 @@ public class UIBattle : UIBase, ILoopParticleContainer
         var define = dataTableManager.GetSkillDefine(skill.skillId);
         skillItem.SetSkillItem(define);
         skillItem.skillId = define.id;
-        skillItem.longPressBtn.onLongPress.AsObservable().Subscribe(_ => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnPressedSkillItem, skillItem.skillId));
+        skillItem.longPressBtn.onLongPress.AsObservable().Subscribe(_ => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnPressedSkillItem, skillItem.skillIndex));
         skillItem.button.OnClickAsObservable().Subscribe(_ => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnClickSkillItem, skillItem.skillIndex));
         skillItem.canvasGroup.alpha = 1;
         skillItem.DoSealed(skill.isBanned);
