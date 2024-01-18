@@ -91,9 +91,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     {
         CanLongPress = false;
         IsChangePage = false;
-
-        //測試用
-        actorSkills = battleManager.player.skills;
         var skillList = ChangeToSkillIDList(actorSkills);
         CommonPageFadeOut();
         endDragEventTriggerInit();
@@ -227,7 +224,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     {
         clearDisplayIcon();
         setScrollRectData(skills);
-        //setDisplayIconSize(skills.Count);
         await createDisplayIcon(skills);
         SwipeScrollRect.RefillCells();
         SwipeScrollRect.ToCenter();
