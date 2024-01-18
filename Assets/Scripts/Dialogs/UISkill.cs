@@ -137,12 +137,10 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         IsChangePage = true;
 
         var IDList = ChangeToSkillIDList(skills);
-        //skills = battleManager.player.baseSkills;
         CommonPageFadeOut();
         endDragEventTriggerInit();
         dragEventTriggerInit();
         SwipeScrollRectInit();
-
         chagneSkillPage.Init(dataTableManager.GetSkillDefine(changeSkillID).icon);
         chagneSkillPage.gameObject.SetActive(true);
         changeID = changeSkillID;
@@ -240,15 +238,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
     #region  DisplayIcon
 
-    private void setDisplayIconSize(int iconCount)
-    {
-        var rectTransform = displayIcon.transform as RectTransform;
-        float height = (iconCount * 40 + (iconCount - 1) * 10) / 2f;
-        float top = rectTransform.offsetMax.y + height;
-        float bottom = rectTransform.offsetMin.y - height;
-        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, bottom);
-        rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, top);
-    }
 
     private async UniTask createDisplayIcon(List<ActorSkill> skills)
     {
@@ -484,13 +473,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         {
             case SkillChangeStateEnum.LevelUp:
                 int levelupID = skillManager.GetLeveUpID(centerID);
-                // await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetSortedActorSkillList();
                 var levelupIsUse = saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetData(currentIndex).isUsed;
                 if (levelupID == -1)
                 {
                     chagneSkillPage.OpenMaxLevelUI();
                     return;
                 }
+                chagneSkillPage.SetManaChangeItems(centerID, levelupID);
                 var levelUpData = dataTableManager.GetSkillDefine(levelupID);
                 target.Init(levelupID);
                 chagneSkillPage.OpenLevelUpUI();
@@ -503,7 +492,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                         originIndex = currentIndex,
                     };
                     await sdk.BattleReplaceSkill(currentIndex, newSkill);
-                    //battleManager.UpdateSkill(battleManager.player.baseSkills, currentIndex, levelupID);
                     SetChangeResult(true);
                     uIManager.RemoveUI<UISkill>();
                 });
@@ -511,6 +499,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
             case SkillChangeStateEnum.Replace:
                 var replaceData = dataTableManager.GetSkillDefine(changeID);
                 var replaceIsUse = saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetData(currentIndex).isUsed;
+                chagneSkillPage.SetManaChangeItems(centerID, changeID);
                 target.Init(changeID);
                 chagneSkillPage.OpenReplaceUI();
                 chagneSkillPage.AddReplaceButtonListener(async () =>
@@ -522,7 +511,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                         originIndex = currentIndex,
                     };
                     await sdk.BattleReplaceSkill(currentIndex, newSkill);
-                    //battleManager.UpdateSkill(battleManager.player.baseSkills, currentIndex, changeID);
                     SetChangeResult(true);
                     uIManager.RemoveUI<UISkill>();
                 });

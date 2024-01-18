@@ -11,14 +11,7 @@ public class UISkillInfo : UIBase
     DataTableManager dataTableManager;
     [Inject]
     SkillManager skillManager;
-    public enum CostItemColor
-    {
-        Non,
-        Red,
-        Green,
-        Blue,
-        Gray,
-    }
+
     [SerializeField]
     private TMP_Text skillTileText;
 
@@ -61,46 +54,46 @@ public class UISkillInfo : UIBase
         foreach (var cost in data.costColors)
         {
             var colorsList = skillManager.GetColorsList(cost.colorEnum);
-            CostItemColor itemColor = CostItemColor.Non;
+            ManaItemColor itemColor = ManaItemColor.Non;
             if (colorsList.Count > 1)
             {
-                itemColor = CostItemColor.Gray;
+                itemColor = ManaItemColor.Gray;
             }
             else
             {
                 if (colorsList[0] == SkillCostColorEnum.Red)
                 {
-                    itemColor = CostItemColor.Red;
+                    itemColor = ManaItemColor.Red;
                 }
                 else if (colorsList[0] == SkillCostColorEnum.Green)
                 {
-                    itemColor = CostItemColor.Green;
+                    itemColor = ManaItemColor.Green;
                 }
                 else if (colorsList[0] == SkillCostColorEnum.Blue)
                 {
-                    itemColor = CostItemColor.Blue;
+                    itemColor = ManaItemColor.Blue;
                 }
             }
             addCostItem(itemColor, cost.count.ToString());
         }
     }
-    private void addCostItem(CostItemColor color, string num)
+    private void addCostItem(ManaItemColor color, string num)
     {
         ManaItem prefab = manaItems[currentIndex];
         prefab.gameObject.SetActive(true);
         Image image = prefab.GetComponent<Image>();
         switch (color)
         {
-            case CostItemColor.Red:
+            case ManaItemColor.Red:
                 image.sprite = manaItemImages[0];
                 break;
-            case CostItemColor.Green:
+            case ManaItemColor.Green:
                 image.sprite = manaItemImages[1];
                 break;
-            case CostItemColor.Blue:
+            case ManaItemColor.Blue:
                 image.sprite = manaItemImages[2];
                 break;
-            case CostItemColor.Gray:
+            case ManaItemColor.Gray:
                 image.sprite = manaItemImages[3];
                 break;
         }

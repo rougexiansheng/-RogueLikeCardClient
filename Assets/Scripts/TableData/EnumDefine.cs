@@ -29,6 +29,18 @@ public enum SkillCostColorEnum
     Blue = 1 << 2,
 }
 
+/// <summary>
+/// 魔力持物件顏色
+/// </summary>
+public enum ManaItemColor
+{
+    Non,
+    Red,
+    Green,
+    Blue,
+    Gray,
+}
+
 
 public enum SkillUnlockEnum
 {
