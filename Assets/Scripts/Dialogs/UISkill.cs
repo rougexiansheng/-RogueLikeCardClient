@@ -112,11 +112,10 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         addDragListener(UpdateMarkPosition);
         addDragListener(() => { displayIcon.SetActive(true); });
         addEndDragListener(() => { displayIcon.SetActive(false); });
-        SwipeScrollRect.ScrollToCell(10, -1);
         SwipeScrollRect.ToCenter();
-        var swipeItem = GetSwipeItemFromScrollRect(0);
+        var swipeItem = GetSwipeItemFromScrollRect(2);
         swipeItem.UpPerformace();
-        showTargetIndexSkill(SkillInfoPage.infoItem, 0);
+        showTargetIndexSkill(SkillInfoPage.infoItem, 2);
         UpdateMarkPosition();
         displayIcon.SetActive(false);
     }
