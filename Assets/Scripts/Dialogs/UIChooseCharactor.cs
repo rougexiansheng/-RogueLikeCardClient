@@ -138,12 +138,15 @@ public class UIChooseCharactor : UIBase
         chooseCharacterID = 1;
         for (int i = 1; i < totalCard + 1; i++)
         {
+            if (i == 3) continue;
             InstantiateCharCard((ActorProfessionEnum)(i));
         }
         foreach (var id in unlockCharacterIds)
         {
+            if (id == 3) continue;
             charCardsDic[(ActorProfessionEnum)id].UnlockCard();
         }
+        totalCard--;
 
     }
     private void SetupGeneratePoints(float angle)
@@ -187,7 +190,9 @@ public class UIChooseCharactor : UIBase
         resetCards();
         resetCharacter();
         int circuleCenterIndex = (totalPosition - 1) / 2;
-        int start = circuleCenterIndex - (targetID - 1);
+
+        int start = circuleCenterIndex - ((targetID == 4 ? targetID - 1 : targetID) - 1);
+
         int end = start + charCardsDic.Count;
         //9
         for (int j = start; j < end; j++)
@@ -195,11 +200,12 @@ public class UIChooseCharactor : UIBase
             if (totalPosition <= j)
             {
                 charCardsDic[changeListIndextoProfessionEnum(j - start)].gameObject.SetActive(false);
+
                 sequence.Join(charCardsDic[changeListIndextoProfessionEnum(j - start)].transform.DOLocalMove(cardsGeneratePoints[totalPosition - 1], cardMoveSpeed).SetEase(Ease.OutExpo));
+
             }
             else if (j <= 0)
             {
-                charCardsDic[changeListIndextoProfessionEnum(Mathf.Abs(j - start))].gameObject.SetActive(false);
                 sequence.Join(charCardsDic[changeListIndextoProfessionEnum(Mathf.Abs(j - start))].transform.DOLocalMove(cardsGeneratePoints[0], cardMoveSpeed).SetEase(Ease.OutExpo));
             }
             else
@@ -207,7 +213,7 @@ public class UIChooseCharactor : UIBase
                 sequence.Join(charCardsDic[changeListIndextoProfessionEnum(j - start)].transform.DOLocalMove(cardsGeneratePoints[j], cardMoveSpeed).SetEase(Ease.OutExpo));
             }
         }
-        SortCardLayer(targetID);
+        SortCardLayer(targetID == 4 ? targetID - 1 : targetID);
         if (professionDataDic.ContainsKey((ActorProfessionEnum)targetID))
         {
             var playerCharData = professionDataDic[(ActorProfessionEnum)targetID];
@@ -249,6 +255,7 @@ public class UIChooseCharactor : UIBase
             // -1 because change character ID to position index
             int order = Mathf.Abs(centerID - 1 - i);
             order = Mathf.Abs(highestLayer - order);
+            if (i + 1 == 3) i++;
             charCardsDic[(ActorProfessionEnum)(i + 1)].SetCanvasSortOrder(order);
         }
     }
@@ -268,6 +275,7 @@ public class UIChooseCharactor : UIBase
     /// <returns></returns>
     private ActorProfessionEnum changeListIndextoProfessionEnum(int index)
     {
+        if (index + 1 == 3) index++;
         return (ActorProfessionEnum)(index + 1);
     }
 
@@ -379,10 +387,14 @@ public class UIChooseCharactor : UIBase
         {
             if (chooseCharacterID < totalCard)
                 chooseCharacterID++;
+            if (chooseCharacterID == 3)
+                chooseCharacterID++;
         }
         else
         {
             if (chooseCharacterID > 1)
+                chooseCharacterID--;
+            if (chooseCharacterID == 3)
                 chooseCharacterID--;
         }
     }
