@@ -49,13 +49,13 @@ public class GameFlowInitState : BaseState<GameFlowController, GameFlowControlle
             typeof(UIBattle),
             typeof(UISkillPopupInfoPage),
             typeof(UIBattleRewardChoose),
-            typeof(UIMap),
-            typeof(UISkill)
+            typeof(UIMap)
             ),
             // 預載UIItem物件
             assetManager.LoadAndSetInObjectPool<UIJumpHpText>(),
             assetManager.LoadAndSetInObjectPool<UISkillBattleItem>(),
-            assetManager.LoadAndSetInObjectPool<UIStateItem>()
+            assetManager.LoadAndSetInObjectPool<UIStateItem>(),
+            assetManager.LoadAndSetInObjectPool<UIItemIcon>()
             );
 
 
@@ -67,15 +67,8 @@ public class GameFlowInitState : BaseState<GameFlowController, GameFlowControlle
             environmentManager.SetNextScene(dungeonCache.LastCache[i][0]);
         }
         var ui = await uIManager.OpenUI<UIBattle>();
-        var doungeonData = dataManager.GetCurrentDungeonLeveData();
-        environmentManager.SetCenterMonsterHpBar(doungeonData.nodeEnum == MapNodeEnum.Boss);
-        // 預載入怪物
-        await preloadManager.PreloadAllMonster();
-        // 設置怪物
-        await battleManager.SetMonsterActor(doungeonData.monsterPosAndId);
-        environmentManager.SetMonsterPos(battleManager.monsters, doungeonData.nodeEnum == MapNodeEnum.EliteMonster);
 
-        // 更新下一關的 acquisitionItems
+        // 更新第一關的 acquisitionItems
         if (dataManager.GetCurrentDungeonLeveData().nodeEnum == MapNodeEnum.Monster || dataManager.GetCurrentDungeonLeveData().nodeEnum == MapNodeEnum.EliteMonster || dataManager.GetCurrentDungeonLeveData().nodeEnum == MapNodeEnum.Boss)
         {
             await sdk.BattleGetMonsterAcquistion();
@@ -84,7 +77,16 @@ public class GameFlowInitState : BaseState<GameFlowController, GameFlowControlle
         {
             await sdk.BattleGetEventAcquistion();
         }
-        // 預載下一關可能會獲得的道具 Icon (掉落物)
+
+        var doungeonData = dataManager.GetCurrentDungeonLeveData();
+        environmentManager.SetCenterMonsterHpBar(doungeonData.nodeEnum == MapNodeEnum.Boss);
+        // 預載入怪物
+        await preloadManager.PreloadAllMonster();
+        // 設置怪物
+        await battleManager.SetMonsterActor(doungeonData.monsterPosAndId, doungeonData.acquisitionItems);
+        environmentManager.SetMonsterPos(battleManager.monsters, doungeonData.nodeEnum == MapNodeEnum.EliteMonster);
+
+        // 預載第一關關可能會獲得的道具 Icon (掉落物)
         var tLs = new List<UniTask>();
 
         for (int i = 0; i < doungeonData.acquisitionItems.Count; i++)
