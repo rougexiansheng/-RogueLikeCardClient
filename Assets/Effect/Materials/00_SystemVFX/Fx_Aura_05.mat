@@ -37,7 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _EditorDrawers: 60
+    - _EditorDrawers: 61
     - _MaskPow: 1
     - _RenderingMode: 0
     - _ScreenUvShDistScale: 1

@@ -14,6 +14,10 @@ public class GameFlowProfitState : BaseState<GameFlowController, GameFlowControl
     BattleManager battleManager;
     [Inject]
     NetworkSaveManager saveManager;
+
+
+    [Inject]
+    SDKProtocol.IProtocolBridge sdk;
     public override UniTask End()
     {
         battleManager.StopTimer();
@@ -27,7 +31,7 @@ public class GameFlowProfitState : BaseState<GameFlowController, GameFlowControl
 
     public override async UniTask Start()
     {
-        // ªíºt¬ÞµP²M°£
+        // ï¿½ï¿½ï¿½tï¿½ÞµPï¿½Mï¿½ï¿½
         GetController().AddPerformanceData(new PModifyShieldData()
         {
             isPlayer = true,
@@ -46,8 +50,22 @@ public class GameFlowProfitState : BaseState<GameFlowController, GameFlowControl
         p.SetColorEffectEnum(SkillCostColorEnum.Blue, PModifyColorData.PerformanceColorEffectEnum.Depletion);
         p.Init(battleManager.player);
         GetController().AddPerformanceData(p);
+
+        var acquisitionItemsList = dataManager.GetCurrentDungeonLeveData().acquisitionItems;
+
+        for (int i = 0; i < acquisitionItemsList.Count; i++)
+        {
+            var itemsList = acquisitionItemsList[i];
+            if (itemsList == null) continue;
+            for (int j = 0; j < itemsList.Count; j++)
+            {
+                await sdk.BattleGainItem(itemsList[j].id, itemsList[j].count);
+            }
+        }
+
         if (!saveManager.GetContainer<NetworkSaveBattleDungeonContainer>().IsDone)
         {
+
             await GetController().Save();
             GetController().SwichGameStateByPerformanceData(GameFlowController.GameFlowState.ChoiceReward);
         }
