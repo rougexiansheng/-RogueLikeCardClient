@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SDKProtocol;
@@ -70,8 +70,15 @@ public class TestSystem : MonoBehaviour
         for (int i = 0; i < monster.Count; i++)
         {
             if (i < battleManager.monsters.Count)
+            {
                 monster[i].actor = battleManager.monsters[i];
-            else monster[i].gameObject.SetActive(false);
+                monster[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                monster[i].actor.isDead = true;
+                monster[i].gameObject.SetActive(false);
+            } 
         }
         player.actor = battleManager.player;
         RxEventBus.Register<ActorProfessionEnum>(EventBusEnum.PlayerDataEnum.UpdateSelectTarget, (s) => monsterIndex = (int)s, this);
