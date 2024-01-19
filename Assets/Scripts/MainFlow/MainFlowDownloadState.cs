@@ -33,6 +33,7 @@ public class MainFlowDownloadState : BaseState<MainFlowController, MainFlowContr
             preloadManager.PrelaodProfessionData(ActorProfessionEnum.Witch),
             preloadManager.PrelaodProfessionData(ActorProfessionEnum.Paladin),
             preloadManager.PrelaodProfessionData(ActorProfessionEnum.Fencer),
+            preloadManager.PrelaodProfessionData(ActorProfessionEnum.Assassin),
             preloadManager.PreloadPassiveAll()
             );
     }

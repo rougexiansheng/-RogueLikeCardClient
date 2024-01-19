@@ -84,6 +84,7 @@ public partial class FakeServer
         DoAddCharacter((int)ActorProfessionEnum.Witch);
         DoAddCharacter((int)ActorProfessionEnum.Paladin);
         DoAddCharacter((int)ActorProfessionEnum.Fencer);
+        DoAddCharacter((int)ActorProfessionEnum.Assassin);
 
         // step4. 撰寫其他創帳號內容
 

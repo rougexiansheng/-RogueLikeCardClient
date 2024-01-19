@@ -133,7 +133,7 @@ public class UIChooseCharactor : UIBase
 
     private void UnLockCharactor(List<int> unlockCharacterIds)
     {
-        totalCard = 3;
+        totalCard = 4;
         //chooseCharacterID = unlockCharacterIds[unlockCharacterIds.Count / 2];
         chooseCharacterID = 1;
         for (int i = 1; i < totalCard + 1; i++)
@@ -208,17 +208,25 @@ public class UIChooseCharactor : UIBase
             }
         }
         SortCardLayer(targetID);
-        var playerCharData = professionDataDic[(ActorProfessionEnum)targetID];
-        SetupSkillGroupButton(playerCharData.SkillGroups, playerCharData.UnlockSkillIDs, playerCharData.DefalutProfessionDatas.SkillGroupsIndex);
-        if (playerCharData.DefalutProfessionDatas != null)
+        if (professionDataDic.ContainsKey((ActorProfessionEnum)targetID))
         {
-            selectCharacterData = playerCharData.DefalutProfessionDatas;
+            var playerCharData = professionDataDic[(ActorProfessionEnum)targetID];
+            SetupSkillGroupButton(playerCharData.SkillGroups, playerCharData.UnlockSkillIDs, playerCharData.DefalutProfessionDatas.SkillGroupsIndex);
+            if (playerCharData.DefalutProfessionDatas != null)
+            {
+                selectCharacterData = playerCharData.DefalutProfessionDatas;
+            }
+            else
+            {
+                selectCharacterData.CharacterSkinId = 0;
+                selectCharacterData.SkillGroupsIndex = 0;
+            }
         }
         else
         {
-            selectCharacterData.CharacterSkinId = 0;
-            selectCharacterData.SkillGroupsIndex = 0;
+            selectCharacterData = null;
         }
+
 
         charNameText.text = charCardsDic[(ActorProfessionEnum)(targetID)].profession.ToString();
         charCardsDic[(ActorProfessionEnum)(targetID)].Select();
@@ -283,10 +291,9 @@ public class UIChooseCharactor : UIBase
         {
             character.gameObject.SetActive(false);
         }
-        foreach (var spine in spineCharacterCtrls)
+        for (int i = 0; i < spineCharacterCtrls.Count; i++)
         {
-            spine.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Origin);
-            //spine.PlayAnimation(SpineAnimationEnum.None);
+            spineCharacterCtrls[i].SetSkin(SpineCharacterCtrl.SpineSkinEnum.Origin);
         }
     }
 
