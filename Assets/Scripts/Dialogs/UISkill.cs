@@ -112,7 +112,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         addDragListener(UpdateMarkPosition);
         addDragListener(() => { displayIcon.SetActive(true); });
         addEndDragListener(() => { displayIcon.SetActive(false); });
-        SwipeScrollRect.ScrollToCell(10 + index, -1);
+        SwipeScrollRect.ScrollToCell(actorSkills.Count - 2 + index, -1);
         SwipeScrollRect.ToCenter();
         var swipeItem = GetSwipeItemFromScrollRect(index);
         swipeItem.UpPerformace();
@@ -156,7 +156,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         addDragListener(UpdateMarkPosition);
         addDragListener(() => { displayIcon.SetActive(true); });
         addEndDragListener(() => { displayIcon.SetActive(false); });
-        SwipeScrollRect.ScrollToCell(10, -1);
+        SwipeScrollRect.ScrollToCell(skills.Count - 2, -1);
         SwipeScrollRect.ToCenter();
         var swipeItem = GetSwipeItemFromScrollRect(0);
         swipeItem.DownPerformace();
