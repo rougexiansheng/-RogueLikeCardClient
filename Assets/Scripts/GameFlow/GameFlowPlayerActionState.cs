@@ -29,9 +29,9 @@ public class GameFlowPlayerActionState : BaseState<GameFlowController, GameFlowC
             return default;
         });
         GetController().UpdatePlayerSkillItem();
-        if(saveManager.GetContainer<NetworkSaveBattleDungeonContainer>().IsDone == false) 
+        if (saveManager.GetContainer<NetworkSaveBattleDungeonContainer>().IsDone == false)
             GetController().AddPerformanceData(new PUIAnimatonStateData { stateEnum = UIBattle.UIAnimatonStateEnum.YourTurnEnd });
-        
+
         battleManager.StopTimer();
     }
 
@@ -63,7 +63,7 @@ public class GameFlowPlayerActionState : BaseState<GameFlowController, GameFlowC
             GetController().UpdatePlayerSkillItem();
             GetController().CheckWinAndLose();
         }
-        GetController().DoPending(() => 
+        GetController().DoPending(() =>
         {
             ui.SetBlock(false);
             return default;
@@ -144,13 +144,17 @@ public class GameFlowPlayerActionState : BaseState<GameFlowController, GameFlowC
     /// <summary>
     /// 顯示技能說明
     /// </summary>
-    /// <param name="skillId"></param>
-    async void OnSkillPopInfo(int skillId)
+    /// <param name="skillIndex"></param>
+    async void OnSkillPopInfo(int skillIndex)
     {
-        var ui = await uIManager.OpenUI<UISkillPopupInfoPage>();
-        ui.Init(skillId);
-        ui.CancelButton.gameObject.SetActive(false);
-        ui.eventTrigger.OnPointerDownAsObservable().Subscribe(_ => uIManager.RemoveUI(ui));
+        //var ui = await uIManager.OpenUI<UISkillPopupInfoPage>();
+        //ui.Init(skillId);
+        //ui.CancelButton.gameObject.SetActive(false);
+        //ui.eventTrigger.OnPointerDownAsObservable().Subscribe(_ => uIManager.RemoveUI(ui));
+
+        var ui = await uIManager.OpenUI<UISkill>();
+        await ui.OpenCheckSkillPage(battleManager.player.skills, skillIndex);
+
     }
     /// <summary>
     /// 開啟自身所有技能

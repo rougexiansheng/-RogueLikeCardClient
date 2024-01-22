@@ -319,7 +319,7 @@ Material:
     - _WaveX: 0
     - _WaveY: 0.5
     - _WorkflowMode: 1
-    - _ZTestMode: 4
+    - _ZTestMode: 0
     - _ZWrite: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}

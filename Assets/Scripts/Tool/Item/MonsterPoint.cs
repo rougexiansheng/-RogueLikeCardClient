@@ -23,8 +23,9 @@ public class MonsterPoint : MonoBehaviour, ILoopParticleContainer
     public async UniTask MonsterRemove()
     {
         spineCharactor.spine.color = Color.white;
+        hpBar.Active(false);
         await spineCharactor.spine.DOFade(0, 0.5f).AsyncWaitForCompletion().AsUniTask();
-        Active(false);
+
     }
 
     public async UniTask MonsterShow()
@@ -77,5 +78,5 @@ public class MonsterPoint : MonoBehaviour, ILoopParticleContainer
         Active(false);
     }
 
-    
+
 }

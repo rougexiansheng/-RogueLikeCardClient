@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -49,6 +50,9 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     private EventTrigger swipeEventTrigger;
     private EventTrigger.Entry swipeEndDragEntry;
     private EventTrigger.Entry swipeDragEntry;
+
+    [SerializeField]
+    public GameObject scrollRectContent;
     [SerializeField]
     private CanvasGroup commonCanvas;
     [SerializeField]
@@ -57,7 +61,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     private float fadeInTime = 0.4f;
     private int scrollRectCount;
     private int groupHeadIndex = 0;
-    private List<int> skillIDList = new List<int>();
+    private List<ActorSkill> skillIDList = new List<ActorSkill>();
     private List<Vector3> displayPositionList = new List<Vector3>();
     private int changeID;
 
@@ -66,12 +70,11 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     private List<UISkillStateItem> skillItemsList = new List<UISkillStateItem>();
     List<SDKProtocol.SkillGroup> totalSkillGroups;
 
+    private bool IsChangePage;
 
     private UniTaskCompletionSource<bool> changeResultTask;
-    private object _changeLock = new object();
 
     private UniTaskCompletionSource<int> chooseResultTask;
-    private object _chooseLock = new object();
 
     private int chooseGroupIndex = 0;
     private object _lock = new object();
@@ -84,16 +87,15 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// For Check Skill Page
     /// </summary>
     /// <param name="actorSkills"></param>
-    public async UniTask OpenCheckSkillPage(List<ActorSkill> actorSkills)
+    public async UniTask OpenCheckSkillPage(List<ActorSkill> actorSkills, int index = 2)
     {
         CanLongPress = false;
-        //測試用
-        actorSkills = battleManager.player.skills;
+        IsChangePage = false;
         var skillList = ChangeToSkillIDList(actorSkills);
         CommonPageFadeOut();
-        SwipeScrollRectInit();
         endDragEventTriggerInit();
-
+        dragEventTriggerInit();
+        SwipeScrollRectInit();
         SkillInfoPage.gameObject.SetActive(true);
         passiveManager.GetCurrentActorAttribute(battleManager.player);
         SkillInfoPage.SetNumText(battleManager.player.currentActorBaseAttribute.currentMove.ToString());
@@ -104,11 +106,19 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
         CommonPageFadeIn();
 
-        await createSkillBar(skillList);
-        showCenterSkillInfo(SkillInfoPage.infoItem);
+        await createSkillBar(actorSkills);
         addEndDragListener(showCenterSkillInfo, SkillInfoPage.infoItem);
-        dragEventTriggerInit();
+
         addDragListener(UpdateMarkPosition);
+        addDragListener(() => { displayIcon.SetActive(true); });
+        addEndDragListener(() => { displayIcon.SetActive(false); });
+        SwipeScrollRect.ScrollToCell(actorSkills.Count - 2 + index, -1);
+        SwipeScrollRect.ToCenter();
+        var swipeItem = GetSwipeItemFromScrollRect(index);
+        swipeItem.UpPerformace();
+        showTargetIndexSkill(SkillInfoPage.infoItem, index);
+        UpdateMarkPosition();
+        displayIcon.SetActive(false);
     }
 
 
@@ -121,12 +131,14 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     public async UniTask OpenChangeSkillPage(List<ActorSkill> skills, int changeSkillID)
     {
         CanLongPress = false;
+        IsChangePage = true;
+
         var IDList = ChangeToSkillIDList(skills);
-        //skills = battleManager.player.baseSkills;
         CommonPageFadeOut();
-        SwipeScrollRectInit();
         endDragEventTriggerInit();
-        chagneSkillPage.Init();
+        dragEventTriggerInit();
+        SwipeScrollRectInit();
+        chagneSkillPage.Init(dataTableManager.GetSkillDefine(changeSkillID).icon);
         chagneSkillPage.gameObject.SetActive(true);
         changeID = changeSkillID;
         chagneSkillPage.AddCancelButtonListener(() =>
@@ -136,13 +148,21 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         });
 
         CommonPageFadeIn();
-        await createSkillBar(IDList);
-        showCenterSkillInfo(chagneSkillPage.CurrentInfoItem);
+        await createSkillBar(skills);
         SetupUpdateSkillBlock(chagneSkillPage.UpdateSkillInfo);
         addEndDragListener(showCenterSkillInfo, chagneSkillPage.CurrentInfoItem);
         addEndDragListener(SetupUpdateSkillBlock, chagneSkillPage.UpdateSkillInfo);
-        dragEventTriggerInit();
+
         addDragListener(UpdateMarkPosition);
+        addDragListener(() => { displayIcon.SetActive(true); });
+        addEndDragListener(() => { displayIcon.SetActive(false); });
+        SwipeScrollRect.ScrollToCell(skills.Count - 2, -1);
+        SwipeScrollRect.ToCenter();
+        var swipeItem = GetSwipeItemFromScrollRect(0);
+        swipeItem.DownPerformace();
+        showTargetIndexSkill(chagneSkillPage.CurrentInfoItem, 0);
+        UpdateMarkPosition();
+        displayIcon.SetActive(false);
     }
 
     /// <summary>
@@ -153,6 +173,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// <param name="prevGroupsIndex"> last time player choose skill group index </param>
     public void OpenEquipmentSkillPage(List<SDKProtocol.SkillGroup> skillGroups, List<int> unlockSkill, int prevGroupsIndex)
     {
+        displayIcon.SetActive(false);
         chooseGroupIndex = prevGroupsIndex;
         groupHeadIndex = (chooseGroupIndex / 4) * 4;
         totalSkillGroups = skillGroups;
@@ -199,11 +220,10 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// </summary>
     /// <param name="skills"></param>
     /// <returns></returns>
-    private async UniTask createSkillBar(List<int> skills)
+    private async UniTask createSkillBar(List<ActorSkill> skills)
     {
         clearDisplayIcon();
         setScrollRectData(skills);
-        //setDisplayIconSize(skills.Count);
         await createDisplayIcon(skills);
         SwipeScrollRect.RefillCells();
         SwipeScrollRect.ToCenter();
@@ -214,25 +234,16 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
     #region  DisplayIcon
 
-    private void setDisplayIconSize(int iconCount)
-    {
-        var rectTransform = displayIcon.transform as RectTransform;
-        float height = (iconCount * 40 + (iconCount - 1) * 10) / 2f;
-        float top = rectTransform.offsetMax.y + height;
-        float bottom = rectTransform.offsetMin.y - height;
-        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, bottom);
-        rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, top);
-    }
 
-    private async UniTask createDisplayIcon(List<int> skills)
+    private async UniTask createDisplayIcon(List<ActorSkill> skills)
     {
         List<Transform> iconTransforms = new List<Transform>();
-        foreach (var id in skills)
+        foreach (var skill in skills)
         {
-            var skillData = dataTableManager.GetSkillDefine(id);
+            var skillData = dataTableManager.GetSkillDefine(skill.skillId);
             var icon = Instantiate(displayprefab).GetComponent<UISkillDisplayItem>();
             icon.transform.SetParent(displayIconContent.transform, false);
-            icon.Init(id, skillData.icon);
+            icon.Init(skill.skillId, skillData.icon);
             iconTransforms.Add(icon.transform);
         }
         LayoutRebuilder.ForceRebuildLayoutImmediate(layoutRoot);
@@ -266,7 +277,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         SwipeScrollRect.totalCount = -1;
     }
 
-    private void setScrollRectData(List<int> skills)
+    private void setScrollRectData(List<ActorSkill> skills)
     {
         skillIDList = skills;
         scrollRectCount = skills.Count;
@@ -285,15 +296,17 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     public void ProvideData(Transform transform, int idx)
     {
         int index = transformIndexNumber(idx);
-        int skillID = skillIDList[index];
+        int skillID = skillIDList[index].skillId;
         var skillData = dataTableManager.GetSkillDefine(skillID);
-        var item = transform.GetComponent<UISkillSwipeItem>();
-        item.Init(index, skillData.icon);
+        var swipeItem = transform.GetComponent<UISkillSwipeItem>();
+        swipeItem.Init(index, skillData.icon);
+        addDragListener(ResetSwipePerfomace, swipeItem);
+        addEndDragListener(swipeItemPerfromace, swipeItem);
         if (CanLongPress)
         {
             UISkillPopupInfoPage popUpPage;
-            item.ButtonLongPress.onLongPress.RemoveAllListeners();
-            item.ButtonLongPress.onLongPress.AddListener(async () =>
+            swipeItem.ButtonLongPress.onLongPress.RemoveAllListeners();
+            swipeItem.ButtonLongPress.onLongPress.AddListener(async () =>
             {
                 popUpPage = await uIManager.OpenUI<UISkillPopupInfoPage>();
                 popUpPage.Init(skillID);
@@ -303,6 +316,38 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                 });
             });
         }
+    }
+
+    private UISkillSwipeItem GetSwipeItemFromScrollRect(int targetIndex)
+    {
+        var list = scrollRectContent.GetComponentsInChildren<UISkillSwipeItem>();
+        foreach (var item in list)
+        {
+            if (targetIndex == item.Index)
+                return item;
+        }
+        return null;
+
+    }
+
+    private void swipeItemPerfromace(UISkillSwipeItem target)
+    {
+        if (target.Index == transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter()))
+        {
+            if (IsChangePage == true)
+            {
+                target.DownPerformace();
+            }
+            else
+            {
+                target.UpPerformace();
+            }
+        }
+    }
+
+    private void ResetSwipePerfomace(UISkillSwipeItem target)
+    {
+        target.ResetPerformace();
     }
 
     private void UpdateMarkPosition()
@@ -339,6 +384,16 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         swipeDragEntry.callback.AddListener((eventData) => { action(); });
     }
 
+    /// <summary>
+    /// Add drag listener
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="target"></param>
+    private void addDragListener(Action<UISkillSwipeItem> action, UISkillSwipeItem target)
+    {
+        swipeDragEntry.callback.AddListener((eventData) => { action(target); });
+    }
+
     private void RemoveAllDragEventTrigger()
     {
         swipeDragEntry.callback.RemoveAllListeners();
@@ -357,7 +412,26 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// </summary>
     /// <param name="action"></param>
     /// <param name="target"></param>
+    private void addEndDragListener(Action action)
+    {
+        swipeEndDragEntry.callback.AddListener((eventData) => { action(); });
+    }
+    /// <summary>
+    /// Add end drag listener
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="target"></param>
     private void addEndDragListener(Action<UISkillInfo> action, UISkillInfo target)
+    {
+        swipeEndDragEntry.callback.AddListener((eventData) => { action(target); });
+    }
+
+    /// <summary>
+    /// Add end drag listener
+    /// </summary>
+    /// <param name="action"></param>
+    /// <param name="target"></param>
+    private void addEndDragListener(Action<UISkillSwipeItem> action, UISkillSwipeItem target)
     {
         swipeEndDragEntry.callback.AddListener((eventData) => { action(target); });
     }
@@ -370,7 +444,13 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     private void showCenterSkillInfo(UISkillInfo target)
     {
         int currentIndex = transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter());
-        var id = skillIDList[currentIndex];
+        var id = skillIDList[currentIndex].skillId;
+        target.Init(id);
+    }
+
+    private void showTargetIndexSkill(UISkillInfo target, int index)
+    {
+        var id = skillIDList[index].skillId;
         target.Init(id);
     }
 
@@ -383,7 +463,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
         chagneSkillPage.ResetStateUI();
         int currentIndex = transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter());
-        int centerID = skillIDList[currentIndex];
+        int centerID = skillIDList[currentIndex].skillId;
 
         switch (skillManager.GetSkillChangeState(centerID, changeID))
         {
@@ -395,6 +475,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                     chagneSkillPage.OpenMaxLevelUI();
                     return;
                 }
+                chagneSkillPage.SetManaChangeItems(centerID, levelupID);
                 var levelUpData = dataTableManager.GetSkillDefine(levelupID);
                 target.Init(levelupID);
                 chagneSkillPage.OpenLevelUpUI();
@@ -407,7 +488,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                         originIndex = currentIndex,
                     };
                     await sdk.BattleReplaceSkill(currentIndex, newSkill);
-                    //battleManager.UpdateSkill(battleManager.player.baseSkills, currentIndex, levelupID);
                     SetChangeResult(true);
                     uIManager.RemoveUI<UISkill>();
                 });
@@ -415,6 +495,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
             case SkillChangeStateEnum.Replace:
                 var replaceData = dataTableManager.GetSkillDefine(changeID);
                 var replaceIsUse = saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetData(currentIndex).isUsed;
+                chagneSkillPage.SetManaChangeItems(centerID, changeID);
                 target.Init(changeID);
                 chagneSkillPage.OpenReplaceUI();
                 chagneSkillPage.AddReplaceButtonListener(async () =>
@@ -426,7 +507,6 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                         originIndex = currentIndex,
                     };
                     await sdk.BattleReplaceSkill(currentIndex, newSkill);
-                    //battleManager.UpdateSkill(battleManager.player.baseSkills, currentIndex, changeID);
                     SetChangeResult(true);
                     uIManager.RemoveUI<UISkill>();
                 });
@@ -471,33 +551,31 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
     public UniTask<int> SelectedGroupIndex()
     {
-        lock (_chooseLock)
-        {
-            if (chooseResultTask == null || chooseResultTask.Task.Status == UniTaskStatus.Canceled || chooseResultTask.Task.Status == UniTaskStatus.Faulted)
-            {
-                chooseResultTask = new UniTaskCompletionSource<int>();
-            }
-            else if (chooseResultTask.Task.Status == UniTaskStatus.Pending)
-            {
-                // 正在進行中的任務
-                chooseResultTask.TrySetCanceled();
-                Debug.LogWarning("The chooseResultTask had exit");
 
-            }
+        if (chooseResultTask == null || chooseResultTask.Task.Status == UniTaskStatus.Canceled || chooseResultTask.Task.Status == UniTaskStatus.Faulted)
+        {
+            chooseResultTask = new UniTaskCompletionSource<int>();
         }
+        else if (chooseResultTask.Task.Status == UniTaskStatus.Pending)
+        {
+            // 正在進行中的任務
+            chooseResultTask.TrySetCanceled();
+            Debug.LogWarning("The chooseResultTask had exit");
+
+        }
+
         return chooseResultTask.Task;
     }
 
     private void SetGroupResult(int index)
     {
-        lock (_changeLock)
+
+        if (chooseResultTask != null)
         {
-            if (chooseResultTask != null)
-            {
-                chooseResultTask.TrySetResult(index);
-                chooseResultTask = null;
-            }
+            chooseResultTask.TrySetResult(index);
+            chooseResultTask = null;
         }
+
     }
     #endregion
 
@@ -532,7 +610,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
                 setupManaPool(group.Skills);
                 RemoveAllDragEventTrigger();
 
-                await createSkillBar(group.Skills);
+                await createSkillBar(ChangeToActorSKills(group.Skills));
                 addDragListener(UpdateMarkPosition);
                 chooseSkillSetPage.TurnOnAllSetItemButton();
             }, i);
@@ -686,6 +764,22 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
             Destroy(item.gameObject);
         }
         skillItemsList.Clear();
+    }
+
+    public List<ActorSkill> ChangeToActorSKills(List<int> intList)
+    {
+        var list = new List<ActorSkill>();
+        // 對 Dictionary 的鍵進行排序並提取值
+        for (int i = 0; i < intList.Count; i++)
+        {
+            list.Add(new ActorSkill()
+            {
+                skillId = intList[i],
+                isUsed = false,
+                originIndex = i,
+            });
+        }
+        return list;
     }
     /// <summary>
     /// 把 ActorSkill List轉為 Int List

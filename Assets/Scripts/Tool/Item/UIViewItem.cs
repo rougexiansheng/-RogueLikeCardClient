@@ -101,7 +101,7 @@ public class UIViewItem : MonoBehaviour
         if (m_shopItemDataDefine != null)
         {
             m_textPrice.text = m_shopItemDataDefine.coinPrice.ToString();
-            m_ImageShopItemIcon.sprite = itemDefine.icon;
+            m_ImageShopItemIcon.sprite = m_shopItemDataDefine.icon;
             if (m_shopItemDataDefine.count == -1)
             {
                 m_textShopItemName.text = m_shopItemDataDefine.name;
@@ -159,7 +159,7 @@ public class UIViewItem : MonoBehaviour
     private async UniTask OpenSkillUi(int skillId)
     {
         var skill = await uIManager.OpenUI<UISkill>();
-        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetSortedActorSkillList(), skillId);
+        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetOriginalSKillList(), skillId);
         var isChange = await skill.IsSkillsChange();
         if (isChange)
         {

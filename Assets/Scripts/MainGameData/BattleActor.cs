@@ -41,6 +41,7 @@ public class BattleActor
     public int monsterNextSkill;
     public MonsterAIbehaviorData behaviorData;
     public MonsterPositionEnum monsterPos;
+    public List<SDKProtocol.ItemData> acquisitionList;
     #endregion
     #region 只有玩家使用
     [Header("Player")]
