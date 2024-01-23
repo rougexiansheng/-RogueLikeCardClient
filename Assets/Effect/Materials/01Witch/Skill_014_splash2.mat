@@ -198,7 +198,7 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _DstMode: 10
-    - _EditorDrawers: 60
+    - _EditorDrawers: 61
     - _EnvironmentReflections: 1
     - _FadeAmount: -0.1
     - _FadeBurnGlow: 5
@@ -235,7 +235,7 @@ Material:
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
     - _ReceiveShadows: 1
-    - _RenderingMode: 0
+    - _RenderingMode: 5
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0
@@ -319,14 +319,14 @@ Material:
     - _WaveX: 0
     - _WaveY: 0.5
     - _WorkflowMode: 1
-    - _ZTestMode: 4
+    - _ZTestMode: 0
     - _ZWrite: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _BaseColor: {r: 0.7169812, g: 0.057493784, b: 0.057493784, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 0.7169812, g: 0.057493784, b: 0.057493784, a: 1}
+    - _Color: {r: 0.7176471, g: 0.07176472, b: 0.07176472, a: 1}
     - _ColorGradingDark: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingLight: {r: 1, g: 1, b: 1, a: 1}
     - _ColorGradingMiddle: {r: 1, g: 1, b: 1, a: 1}
