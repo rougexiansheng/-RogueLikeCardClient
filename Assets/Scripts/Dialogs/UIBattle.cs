@@ -78,6 +78,7 @@ public class UIBattle : UIBase, ILoopParticleContainer
     [SerializeField]
     CanvasGroup canvasGroup;
 
+
     /// <summary>跳寫跟隨的位置點</summary>
     public List<UIFollowObject> monsterScreenPoint;
     /// <summary> 儲存掛在身上的 Loop Particle 特效。 key: passiveId,  value:ParticleObj </summary>

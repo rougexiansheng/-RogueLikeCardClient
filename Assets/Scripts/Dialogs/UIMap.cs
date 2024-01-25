@@ -54,8 +54,6 @@ public class UIMap : UIBase
 
     [Inject]
     SDKProtocol.IProtocolBridge sdk;
-    [SerializeField]
-    GameObject buttonRoot;
 
     [SerializeField]
     GameObject root;
@@ -222,7 +220,7 @@ public class UIMap : UIBase
     private UIMapButton createUI(int nodeEnum, Vector3 buttonPosition, int isNodeEnume = 1)
     {
         UIMapButton mapButton = GetUIMapButtonObject(nodeEnum);
-        mapButton.SetUIPosition(buttonRoot.transform, buttonPosition);
+        mapButton.SetUIPosition(gameObject.transform, buttonPosition);
         mapButton.Init(ButtonImages[nodeEnum + isNodeEnume], UIMapButton.MapButtonState.Disable, nodeEnum + isNodeEnume);
         return mapButton;
     }
@@ -325,7 +323,7 @@ public class UIMap : UIBase
             flashSequence.Kill();
         var sequence = DOTween.Sequence();
         sequence.Join(root.GetComponent<CanvasGroup>().DOFade(fadeOutValue, fadeOutTime));
-        sequence.Join(buttonRoot.GetComponent<CanvasGroup>().DOFade(fadeOutValue, fadeOutTime));
+        sequence.Join(gameObject.GetComponent<CanvasGroup>().DOFade(fadeOutValue, fadeOutTime));
         sequence.Join(flashRoot.GetComponent<CanvasGroup>().DOFade(fadeOutValue, fadeOutTime));
 
         sequence.Join(playerUI.ZoomOut(zoomOutValue, zoomInOutTime));

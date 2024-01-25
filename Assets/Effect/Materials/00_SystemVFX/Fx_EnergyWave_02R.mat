@@ -12,7 +12,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - ADDITIVECONFIG_ON
   - MASK_ON
   - SHAPE1ROTATE_ON
   m_InvalidKeywords: []
@@ -20,7 +19,8 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
-  stringTagMap: {}
+  stringTagMap:
+    RenderType: Transparent
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -188,7 +188,7 @@ Material:
     - _DistortionScrollYSpeed: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _DstMode: 1
+    - _DstMode: 10
     - _EditorDrawers: 61
     - _EnvironmentReflections: 1
     - _FadeAmount: -0.1
@@ -223,7 +223,7 @@ Material:
     - _RandomSh2Mult: 1
     - _RandomSh3Mult: 1
     - _ReceiveShadows: 1
-    - _RenderingMode: 5
+    - _RenderingMode: 0
     - _RimAddAmount: 1
     - _RimBias: 0
     - _RimErodesAlpha: 0
@@ -284,7 +284,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _SrcMode: 1
+    - _SrcMode: 5
     - _Surface: 0
     - _TextureScrollXSpeed: 1
     - _TextureScrollYSpeed: 0
@@ -304,7 +304,7 @@ Material:
     - _WaveX: 0
     - _WaveY: 0.5
     - _WorkflowMode: 1
-    - _ZTestMode: 4
+    - _ZTestMode: 0
     - _ZWrite: 0
     m_Colors:
     - _BackFaceTint: {r: 0.5, g: 0.5, b: 0.5, a: 1}
