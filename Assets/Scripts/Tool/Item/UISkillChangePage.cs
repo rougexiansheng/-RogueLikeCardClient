@@ -25,7 +25,7 @@ public class UISkillChangePage : UIBase
     [SerializeField]
     private Button levelUpButton;
     [SerializeField]
-    private UISkillSwipeItem targetSkill;
+    private UISkillBattleItem targetSkill;
 
     [SerializeField]
     private TMP_Text changeStateText;
@@ -33,14 +33,15 @@ public class UISkillChangePage : UIBase
     [SerializeField]
     private List<ManaChangeItem> manaChangeItems;
 
-    public void Init(Sprite sprite)
+    public void Init(int skillID)
     {
         targetSkill.gameObject.SetActive(true);
+        targetSkill.SetSkillItem(dataTableManager.GetSkillDefine(skillID));
         RemoveAllListeners();
         changeStateText.text = "";
         replaceButton.gameObject.SetActive(false);
         levelUpButton.gameObject.SetActive(false);
-        targetSkill.Icon.sprite = sprite;
+
         foreach (var item in manaChangeItems)
         {
             item.gameObject.SetActive(false);
@@ -49,6 +50,12 @@ public class UISkillChangePage : UIBase
 
     public void SetManaChangeItems(int orignalID, int chnageID)
     {
+        foreach (var item in manaChangeItems)
+        {
+            item.gameObject.SetActive(false);
+            item.SetText(0);
+        }
+
         var orignalDic = createManaColorDic(dataTableManager.GetSkillDefine(orignalID).costColors);
         var changeDic = createManaColorDic(dataTableManager.GetSkillDefine(chnageID).costColors);
 

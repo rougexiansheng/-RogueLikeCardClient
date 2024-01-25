@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UniRx;
 using Cysharp.Threading.Tasks;
 using System;
+using DG.Tweening;
 
 public class UISkillBattleItem : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class UISkillBattleItem : MonoBehaviour
     public ButtonLongPress longPressBtn;
     public int skillId;
     public int skillIndex;
+    public bool IsCenter = true;
+    public GameObject root;
     bool isReady, isUsed, isBanned, isMalicious;
     public void ReadyCost(bool isReady)
     {
@@ -167,4 +170,22 @@ public class UISkillBattleItem : MonoBehaviour
             }
         }
     }
+
+    public void UpPerformace()
+    {
+        root.transform.DOLocalMoveY(100, 0.2f);
+        IsCenter = false;
+    }
+    public void DownPerformace()
+    {
+        root.transform.DOLocalMoveY(-100, 0.2f);
+        IsCenter = false;
+    }
+    public void ResetPerformace()
+    {
+        if (IsCenter == true) return;
+        root.transform.DOLocalMoveY(0, 0.01f);
+        IsCenter = true;
+    }
+
 }
