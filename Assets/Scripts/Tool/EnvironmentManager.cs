@@ -468,12 +468,14 @@ public class EnvironmentManager : IInitializable, ITickable
                 else
                 {
                     mp.hpBar.passiveIconItems[idx].passiveId = define.id;
+                    mp.hpBar.passiveIconItems[idx].stackCount.text = passiveData.stackCount.ToString();
                     mp.hpBar.passiveIconItems[idx].icon.sprite = define.icon;
                     mp.hpBar.passiveIconItems[idx].DoAddAnimate();
                 }
             }
             else
             {
+                passiveItem.stackCount.text = passiveData.stackCount.ToString();
                 passiveItem.DoUpdate();
             }
         }

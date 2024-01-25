@@ -29,7 +29,7 @@ public class UIDressBreak : MonoBehaviour
     Color flashColor;
     [SerializeField]
     AnimationCurve curve;
-    public void Init(GameObject spineObj,AudioClip audioClip,AssetManager assetManager)
+    public void Init(GameObject spineObj, AudioClip audioClip, AssetManager assetManager)
     {
         if (characterCtrl != null)
         {
@@ -45,10 +45,10 @@ public class UIDressBreak : MonoBehaviour
         ((RectTransform)characterCtrl.transform).anchoredPosition3D = Vector3.zero;
         ((RectTransform)characterCtrl.transform).localScale = Vector3.one;
     }
-    [InspectorButton]
-    public async UniTask Show()
+
+    public async UniTask Show(SpineCharacterCtrl.SpineSkinEnum currentSkinEnum)
     {
-        characterCtrl.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Origin);
+        characterCtrl.SetSkin(currentSkinEnum);
 
         var t = PlayAnimation();
 
@@ -74,6 +74,7 @@ public class UIDressBreak : MonoBehaviour
         // ²H¥XÃö³¬
         await BgImg.DOFade(bgEndA, bgEndt).AsyncWaitForCompletion().AsUniTask();
         gameObject.SetActive(false);
+        characterCtrl.SetSkin(currentSkinEnum++);
     }
 
     async UniTask PlayAnimation()

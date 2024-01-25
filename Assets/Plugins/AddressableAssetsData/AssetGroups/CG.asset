@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: CG
+  m_EditorClassIdentifier: 
+  m_GroupName: CG
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 199191b141a8cd34a8b0ed240cb5f309
+  m_SerializeEntries:
+  - m_GUID: 60b226e59e398e547a107d610142fd38
+    m_Address: Assets/DynamicAssets/Spine/Prefabs/CG
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: e555d53803f248f4399d5f2a97ad2847, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 8176fb69ccec9874daebfa1a57094d6d, type: 2}
+    - {fileID: 11400000, guid: 89102246a5eae364da272b54bbb5ea14, type: 2}

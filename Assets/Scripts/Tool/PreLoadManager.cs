@@ -16,6 +16,7 @@ public class PreloadManager
     const string SCENE_NAME_PATH = DYNAMIC_ASSETS_PATH + "UI/SceneNames/";
     const string SPINE_MONSTER_PATH = SPINE_PREFABS + "Monster/";
     const string CHARACTOR_PATH = SPINE_PREFABS + "Character/";
+    const string CHARACTORCG_PATH = SPINE_PREFABS + "CG/";
     #endregion
 
     [Inject]
@@ -277,10 +278,10 @@ public class PreloadManager
             var data = dataTableManager.GetProfessionDataDefine(professionEnum);
             var ls = await UniTask.WhenAll(
                 assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.prefabName}.prefab"),
-                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine1}.prefab"),
-                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine2}.prefab"),
-                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine3}.prefab"),
-                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTOR_PATH}{originDataDefine.cgSpine4}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTORCG_PATH}{originDataDefine.cgSpine1}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTORCG_PATH}{originDataDefine.cgSpine2}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTORCG_PATH}{originDataDefine.cgSpine3}.prefab"),
+                assetManager.AcyncLoadAsset<GameObject>($"{CHARACTORCG_PATH}{originDataDefine.cgSpine4}.prefab"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.attackSound}"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.hitSound}"),
                 assetManager.AcyncLoadAsset<AudioClip>($"{SOUND_PATH}{originDataDefine.clickSound}"),
@@ -291,10 +292,10 @@ public class PreloadManager
                 );
             var obj = ls.Item1;
             data.spineCharacter = obj.GetComponent<SpineCharacterCtrl>();
-            data.cgSpine1 = ls.Item2.GetComponent<Spine.Unity.SkeletonGraphic>();
-            data.cgSpine2 = ls.Item3.GetComponent<Spine.Unity.SkeletonGraphic>();
-            data.cgSpine3 = ls.Item4.GetComponent<Spine.Unity.SkeletonGraphic>();
-            data.cgSpine4 = ls.Item5.GetComponent<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine1 = ls.Item2.GetComponentInChildren<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine2 = ls.Item3.GetComponentInChildren<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine3 = ls.Item4.GetComponentInChildren<Spine.Unity.SkeletonGraphic>();
+            data.cgSpine4 = ls.Item5.GetComponentInChildren<Spine.Unity.SkeletonGraphic>();
             data.attackSound = ls.Item6;
             data.hitSound = ls.Item7;
             data.clickSound = ls.Item8;

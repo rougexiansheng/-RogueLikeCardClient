@@ -7,6 +7,7 @@ public class PPassiveData : PerformanceData
     public bool isPlayer;
     public BattleActor.MonsterPositionEnum monsterPosition;
     public int passiveId;
+    public int stackCount;
     public bool isRemove = false;
     public void Init(BattleActor actor)
     {

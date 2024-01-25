@@ -185,6 +185,7 @@ public class GameFlowController : BaseControl<GameFlowController, GameFlowContro
         {
             var p = new PPassiveData();
             p.Init(actor);
+            p.stackCount = actor.passives[i].currentStack;
             p.passiveId = actor.passives[i].passiveId;
             AddPerformanceData(p);
         }

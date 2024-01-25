@@ -26,7 +26,8 @@ public class SpineCharacterCtrl : MonoBehaviour
     {
         Default,
         Origin,
-        Damage
+        Damage,
+        Damage02
     }
 
     public UniTask AttackTrigger()

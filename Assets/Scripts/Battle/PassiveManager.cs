@@ -282,6 +282,7 @@ public class PassiveManager : IInitializable
         UtilityHelper.BattleLog($"Passive Name:{dataTableManager.GetPassiveDefine(battleData.modifyActorPassive.passiveId).passiveName} 剩餘層數:{battleData.modifyActorPassive.currentStack}", UtilityHelper.BattleLogEnum.Passive);
         // 被動修改
         p.passiveId = battleData.modifyActorPassive.passiveId;
+        p.stackCount = battleData.modifyActorPassive.currentStack;
         gameFlow.AddPerformanceData(p);
         OnActorPassive(target, PassiveTriggerEnum.OnPassiveModifyAfter, battleData);
     }
@@ -368,6 +369,7 @@ public class PassiveManager : IInitializable
                     pp.Init(passive.owner);
                     pp.isRemove = true;
                     pp.passiveId = passive.passiveId;
+                    pp.stackCount = passive.currentStack;
                     gameFlow.AddPerformanceData(pp);
 
                     actor.passives.Remove(passive);
@@ -386,6 +388,7 @@ public class PassiveManager : IInitializable
         passive.keepCount = 0;
         battleData.modifyActorPassive = passive;
         p.passiveId = battleData.modifyActorPassive.passiveId;
+        p.stackCount = battleData.modifyActorPassive.currentStack;
         gameFlow.AddPerformanceData(p);
         UtilityHelper.BattleLog($"Passive ability ActorName:{actor.actorName} Passive:{battleData.modifyActorPassive.passiveId}-{dataTableManager.GetPassiveDefine(battleData.modifyActorPassive.passiveId).passiveName} 新增後層數:{battleData.modifyActorPassive.currentStack}", UtilityHelper.BattleLogEnum.Passive);
         OnActorPassive(actor, PassiveTriggerEnum.OnPassiveModifyAfter, battleData);

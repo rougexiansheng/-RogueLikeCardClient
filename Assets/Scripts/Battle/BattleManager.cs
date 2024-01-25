@@ -71,6 +71,7 @@ public class BattleManager : IInitializable
             p.Init(player);
             p.isRemove = true;
             p.passiveId = ls[i].passiveId;
+            p.stackCount = ls[i].currentStack;
             gameFlow.AddPerformanceData(p);
             player.passives.Remove(ls[i]);
         }

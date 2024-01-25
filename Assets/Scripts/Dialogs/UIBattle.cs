@@ -476,11 +476,17 @@ public class UIBattle : UIBase, ILoopParticleContainer
         maxHpText.text = max.ToString();
         var value = current / (float)max;
         playerHpImg.DOFillAmount(value, 0.2f);
-        if (value < 0.5f && playerHpImg.fillAmount > 0.5f && spineCharactor.currentSkin == SpineCharacterCtrl.SpineSkinEnum.Origin)
+        if (value < 0.6f && playerHpImg.fillAmount > 0.6f && spineCharactor.currentSkin == SpineCharacterCtrl.SpineSkinEnum.Origin)
         {
             // 表演爆衣
             spineCharactor.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Damage);
-            await uIDressBreak.Show();
+            await uIDressBreak.Show(SpineCharacterCtrl.SpineSkinEnum.Origin);
+        }
+        else if (value < 0.3f && playerHpImg.fillAmount > 0.3f && spineCharactor.currentSkin == SpineCharacterCtrl.SpineSkinEnum.Damage)
+        {
+            // 表演爆衣
+            spineCharactor.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Damage02);
+            await uIDressBreak.Show(SpineCharacterCtrl.SpineSkinEnum.Damage);
         }
     }
     /// <summary>
@@ -545,6 +551,7 @@ public class UIBattle : UIBase, ILoopParticleContainer
                 else
                 {
                     passiveIconItems[idx].passiveId = define.id;
+                    passiveIconItems[idx].stackCount.text = passiveData.stackCount.ToString();
                     passiveIconItems[idx].icon.sprite = define.icon;
                     passiveIconItems[idx].DoAddAnimate();
                 }
@@ -552,6 +559,7 @@ public class UIBattle : UIBase, ILoopParticleContainer
             else
             {
                 passiveItem.DoUpdate();
+                passiveItem.stackCount.text = passiveData.stackCount.ToString();
             }
         }
         return UniTask.Delay(175);
