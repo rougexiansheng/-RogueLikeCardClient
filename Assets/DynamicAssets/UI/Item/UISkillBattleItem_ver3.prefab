@@ -2041,6 +2041,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1504861435944698662, guid: 397d230a467632047b4bf0169df3aae0,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1504861435944698662, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
@@ -2049,6 +2054,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: SystemEffect_CastSkill
       objectReference: {fileID: 0}
+    - target: {fileID: 3896332174038246227, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5048953145635767645, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5048953145635767645, guid: 397d230a467632047b4bf0169df3aae0,
         type: 3}
       propertyPath: m_SortingLayer
@@ -2056,7 +2071,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5066054141103479742, guid: 397d230a467632047b4bf0169df3aae0,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5066054141103479742, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
       propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5595588633814649445, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5595588633814649445, guid: 397d230a467632047b4bf0169df3aae0,
@@ -2166,7 +2191,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6357455760172956573, guid: 397d230a467632047b4bf0169df3aae0,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6357455760172956573, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
       propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7220389903888907645, guid: 397d230a467632047b4bf0169df3aae0,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7220389903888907645, guid: 397d230a467632047b4bf0169df3aae0,

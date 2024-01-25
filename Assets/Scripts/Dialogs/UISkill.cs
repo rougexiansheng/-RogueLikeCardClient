@@ -30,8 +30,9 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     UIManager uIManager;
     [SerializeField]
     private Image displayprefab;
+
     [SerializeField]
-    private UISkillSwipeItem swipePrefab;
+    private UISkillBattleItem swipePrefab;
     [SerializeField]
     private UISkillEquipment chooseSkillSetPage;
     [SerializeField]
@@ -138,7 +139,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         endDragEventTriggerInit();
         dragEventTriggerInit();
         SwipeScrollRectInit();
-        chagneSkillPage.Init(dataTableManager.GetSkillDefine(changeSkillID).icon);
+        chagneSkillPage.Init(changeSkillID);
         chagneSkillPage.gameObject.SetActive(true);
         changeID = changeSkillID;
         chagneSkillPage.AddCancelButtonListener(() =>
@@ -149,7 +150,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
         CommonPageFadeIn();
         await createSkillBar(skills);
-        SetupUpdateSkillBlock(chagneSkillPage.UpdateSkillInfo);
+
         addEndDragListener(showCenterSkillInfo, chagneSkillPage.CurrentInfoItem);
         addEndDragListener(SetupUpdateSkillBlock, chagneSkillPage.UpdateSkillInfo);
 
@@ -161,6 +162,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         var swipeItem = GetSwipeItemFromScrollRect(0);
         swipeItem.DownPerformace();
         showTargetIndexSkill(chagneSkillPage.CurrentInfoItem, 0);
+        SetupUpdateSkillBlock(chagneSkillPage.UpdateSkillInfo);
         UpdateMarkPosition();
         displayIcon.SetActive(false);
     }
@@ -271,7 +273,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
     private void SwipeScrollRectInit()
     {
-        assetManager.SetDefaultObject<UISkillSwipeItem>(swipePrefab);
+        //assetManager.SetDefaultObject<UISkillBattleItem>(swipePrefab);
         SwipeScrollRect.prefabSource = this;
         SwipeScrollRect.dataSource = this;
         SwipeScrollRect.totalCount = -1;
@@ -285,9 +287,10 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
 
     public GameObject GetObject(int index)
     {
-        var image = assetManager.GetObject<UISkillSwipeItem>();
-        image.transform.localScale = Vector3.one;
-        return image.gameObject;
+        var item = assetManager.GetObject<UISkillBattleItem>();
+        item.transform.localScale = Vector3.one;
+        item.canvasGroup.alpha = 1;
+        return item.gameObject;
     }
     public void ReturnObject(Transform trans)
     {
@@ -298,15 +301,17 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         int index = transformIndexNumber(idx);
         int skillID = skillIDList[index].skillId;
         var skillData = dataTableManager.GetSkillDefine(skillID);
-        var swipeItem = transform.GetComponent<UISkillSwipeItem>();
-        swipeItem.Init(index, skillData.icon);
+        var swipeItem = transform.GetComponent<UISkillBattleItem>();
+        swipeItem.SetSkillItem(skillData);
+        swipeItem.skillId = skillID;
+        swipeItem.skillIndex = index;
         addDragListener(ResetSwipePerfomace, swipeItem);
         addEndDragListener(swipeItemPerfromace, swipeItem);
         if (CanLongPress)
         {
             UISkillPopupInfoPage popUpPage;
-            swipeItem.ButtonLongPress.onLongPress.RemoveAllListeners();
-            swipeItem.ButtonLongPress.onLongPress.AddListener(async () =>
+            swipeItem.longPressBtn.onLongPress.RemoveAllListeners();
+            swipeItem.longPressBtn.onLongPress.AddListener(async () =>
             {
                 popUpPage = await uIManager.OpenUI<UISkillPopupInfoPage>();
                 popUpPage.Init(skillID);
@@ -318,21 +323,21 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         }
     }
 
-    private UISkillSwipeItem GetSwipeItemFromScrollRect(int targetIndex)
+    private UISkillBattleItem GetSwipeItemFromScrollRect(int targetIndex)
     {
-        var list = scrollRectContent.GetComponentsInChildren<UISkillSwipeItem>();
+        var list = scrollRectContent.GetComponentsInChildren<UISkillBattleItem>();
         foreach (var item in list)
         {
-            if (targetIndex == item.Index)
+            if (targetIndex == item.skillIndex)
                 return item;
         }
         return null;
 
     }
 
-    private void swipeItemPerfromace(UISkillSwipeItem target)
+    private void swipeItemPerfromace(UISkillBattleItem target)
     {
-        if (target.Index == transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter()))
+        if (target.skillIndex == transformIndexNumber(SwipeScrollRect.FindClosestIndexToCenter()))
         {
             if (IsChangePage == true)
             {
@@ -345,7 +350,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
         }
     }
 
-    private void ResetSwipePerfomace(UISkillSwipeItem target)
+    private void ResetSwipePerfomace(UISkillBattleItem target)
     {
         target.ResetPerformace();
     }
@@ -389,7 +394,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// </summary>
     /// <param name="action"></param>
     /// <param name="target"></param>
-    private void addDragListener(Action<UISkillSwipeItem> action, UISkillSwipeItem target)
+    private void addDragListener(Action<UISkillBattleItem> action, UISkillBattleItem target)
     {
         swipeDragEntry.callback.AddListener((eventData) => { action(target); });
     }
@@ -431,7 +436,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     /// </summary>
     /// <param name="action"></param>
     /// <param name="target"></param>
-    private void addEndDragListener(Action<UISkillSwipeItem> action, UISkillSwipeItem target)
+    private void addEndDragListener(Action<UISkillBattleItem> action, UISkillBattleItem target)
     {
         swipeEndDragEntry.callback.AddListener((eventData) => { action(target); });
     }
@@ -800,7 +805,7 @@ public class UISkill : UIBase, LoopScrollPrefabSource, LoopScrollDataSource
     {
         RxEventBus.UnRegister(this);
         await thisPageFadeOut();
-        assetManager.ClearObjectPool<UISkillSwipeItem>();
+        //assetManager.ClearObjectPool<UISkillSwipeItem>();
         base.OnClose();
     }
 
