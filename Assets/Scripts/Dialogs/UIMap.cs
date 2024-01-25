@@ -8,6 +8,8 @@ using SDKProtocol;
 using DG.Tweening;
 using System.Linq;
 using DG.Tweening.Core.Easing;
+using Tayx.Graphy.Utils.NumString;
+using System.Data;
 
 
 [Serializable]
@@ -38,8 +40,7 @@ public class UIMap : UIBase
     [SerializeField]
     private float zoomInValue = 1f;
 
-    [SerializeField]
-    private float flashScaleSize = 1.1f;
+
 
     [SerializeField]
     private float flashScaleTime = 0.7f;
@@ -80,6 +81,9 @@ public class UIMap : UIBase
     public UIMapButton BButtonGameObject;
     [SerializeField]
     public List<Vector3> FirstLayerButtonPosition;
+
+    [SerializeField]
+    public List<RectTransform> mapPointPosition;
     private string SMapButton = "SmallUIMapButton";
 
     private string BMapButton = "BigUIMapButton";
@@ -164,9 +168,25 @@ public class UIMap : UIBase
             {
                 DungeonLevelData node = oneLayer[j];
                 int nodePosition = dataTableManager.GetDungeonDataDefine(node.dungeonId).UIPosition - 1;
-                Vector3 position = FirstLayerButtonPosition[nodePosition] + new Vector3(0, 300 * i, 0);
+                //Vector3 position = FirstLayerButtonPosition[nodePosition] + new Vector3(0, 300 * i, 0);
+                Vector3 position = mapPointPosition[nodePosition + i * 3].localPosition;
                 currentButtonDic[node.dungeonId] = createUI((int)node.nodeEnum, position);
                 flashImageDic[node.dungeonId] = createFlashImage((int)node.nodeEnum, node.dungeonId, position);
+                float center = 1;
+                if (nodePosition == 1)
+                {
+                    center = 0.85f - 0.1f * i;
+
+                }
+                else
+                {
+                    center = 0.8f - 0.1f * i;
+                }
+
+                currentButtonDic[node.dungeonId].gameObject.transform.localScale = new Vector3(center, center, center);
+                flashImageDic[node.dungeonId].gameObject.transform.localScale = new Vector3(center, center, center);
+
+
             }
         }
     }
@@ -204,6 +224,7 @@ public class UIMap : UIBase
         }
 
         playerUI = createUI(playerEnumNumber, oldMapButton.transform.localPosition, 0);
+        playerUI.transform.localScale = new Vector3(0.85f, 0.85f, 0.85f);
         oldMapButton.gameObject.SetActive(false);
         flashImageDic[playerCurrentID].gameObject.SetActive(false);
 
@@ -306,6 +327,7 @@ public class UIMap : UIBase
     {
         image.gameObject.SetActive(true);
         var sequence = DOTween.Sequence();
+        float flashScaleSize = image.transform.localScale.x + 0.1f;
         sequence.Join(image.transform.DOScale(new Vector3(flashScaleSize, flashScaleSize, flashScaleSize), flashScaleTime))
         .Join(image.DOFade(flashFadeValue, flashFadeTime));
 
