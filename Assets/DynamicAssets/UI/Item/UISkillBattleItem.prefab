@@ -985,9 +985,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelObjs:
-  - {fileID: 1463812193727083010}
-  - {fileID: 1481547649470348761}
   - {fileID: 4738217138391298164}
+  - {fileID: 1481547649470348761}
+  - {fileID: 1463812193727083010}
   ColorSprites:
   - {fileID: 21300000, guid: d567f5b8063ea694b92ae93de2c2569a, type: 3}
   - {fileID: 21300000, guid: 575058b24d9c9b647aa0c59715101cec, type: 3}
