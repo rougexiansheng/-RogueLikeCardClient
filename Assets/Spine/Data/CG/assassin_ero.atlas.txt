@@ -1,0 +1,13 @@
+assassin_ero.png
+size:2048,2048
+filter:Linear,Linear
+pma:true
+scale:0.5
+Erol/semen01
+bounds:853,23,667,992
+offsets:0,102,667,1094
+rotate:90
+Normal/bg01
+bounds:853,692,600,1153
+Normal/body01
+bounds:2,214,849,1631
