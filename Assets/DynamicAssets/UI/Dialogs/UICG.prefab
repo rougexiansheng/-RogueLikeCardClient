@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 2072249378489198863}
   - component: {fileID: 4229624120142502946}
   m_Layer: 5
-  m_Name: UIGC
+  m_Name: UICG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,6 +129,7 @@ MonoBehaviour:
   m_enableSafeArea: 0
   spine: {fileID: 0}
   spinePoint: {fileID: 5466556001136990550}
+  canvasGroup: {fileID: 4592276457234682935}
 --- !u!1 &6835435635669051561
 GameObject:
   m_ObjectHideFlags: 0

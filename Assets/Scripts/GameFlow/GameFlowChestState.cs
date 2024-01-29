@@ -19,6 +19,8 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
     ItemManager itemManager;
     [Inject]
     NetworkSaveManager saveManager;
+    [Inject]
+    BattleManager battleManager;
 
     [Inject]
     SDKProtocol.IProtocolBridge sdk;
@@ -35,6 +37,8 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
     public async override UniTask Start()
     {
         await OpenUIAsync();
+        var ui = uIManager.FindUI<UIBattle>();
+        ui.UpdateAntiqueImages(battleManager.player.passives);
     }
 
     public override void Update()

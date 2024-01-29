@@ -23,6 +23,8 @@ public class GameFlowGetAntiqueState : BaseState<GameFlowController, GameFlowCon
 
     [Inject]
     NetworkSaveManager saveManager;
+    [Inject]
+    BattleManager battleManager;
 
     ViewItemData selectItemData = null;
     public override UniTask End()
@@ -38,6 +40,8 @@ public class GameFlowGetAntiqueState : BaseState<GameFlowController, GameFlowCon
     public async override UniTask Start()
     {
         await OpenUIAsync();
+        var ui = uIManager.FindUI<UIBattle>();
+        ui.UpdateAntiqueImages(battleManager.player.passives);
     }
 
     public override void Update()

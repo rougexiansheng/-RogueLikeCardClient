@@ -48,8 +48,11 @@ public class UIBattle : UIBase, ILoopParticleContainer
     GameObject skillObjectBg, skillObject;
     [SerializeField]
     List<UIPassiveIconItem> passiveIconItems;
-    [Header("Boss")]
-    public UIMonsterHpBar bossHpbar;
+    [SerializeField]
+    List<Image> antiqueImgs;
+    [Header("Monster")]
+    [SerializeField]
+    public List<UIMiniMonsterHpInfo> miniMonsterInfos;
     [Header("Show")]
     /// <summary>爆衣表演</summary>
     public UIDressBreak uIDressBreak;
@@ -105,11 +108,36 @@ public class UIBattle : UIBase, ILoopParticleContainer
         winReviewBtn.onClick.AddListener(() => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnClickReview));
         reviveBtn.onClick.AddListener(() => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnClickRevive));
         monsterButton.onLongPress.AddListener(() => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnLongPressMonster));
-        RxEventBus.Register<BattleActor.MonsterPositionEnum>(EventBusEnum.PlayerDataEnum.UpdateSelectTarget, UpdateBossHpBar, this);
         skillsInfoBtn.OnClickAsObservable().Subscribe(_ => RxEventBus.Send(EventBusEnum.UIBattleEnum.OnClickSkillInfo));
         ShowSkillItme(false);
         SetBlock(true);
         return base.OnOpen();
+    }
+
+    public void UpdateAntiqueImages(List<ActorPassive> actorPassives)
+    {
+        List<int> passives = new List<int>();
+        for (int i = 0; i < actorPassives.Count; i++)
+        {
+            var define = dataTableManager.GetPassiveDefine(actorPassives[i].passiveId);
+            if (define.passiveType == PassiveTypeEnum.Antique)
+            {
+                passives.Add(actorPassives[i].passiveId);
+            }
+        }
+        for (int i = 0; i < antiqueImgs.Count; i++)
+        {
+            if (i < actorPassives.Count)
+            {
+                var define = dataTableManager.GetPassiveDefine(actorPassives[i].passiveId);
+                antiqueImgs[i].enabled = true;
+                antiqueImgs[i].sprite = define.icon;
+            }
+            else
+            {
+                antiqueImgs[i].enabled = false;
+            }
+        }
     }
 
     public void ClearPassive()
@@ -118,11 +146,6 @@ public class UIBattle : UIBase, ILoopParticleContainer
         {
             passiveIconItems[i].Clear();
         }
-    }
-
-    void UpdateBossHpBar(BattleActor.MonsterPositionEnum positionEnum)
-    {
-        bossHpbar.Active(positionEnum == BattleActor.MonsterPositionEnum.Center);
     }
 
     public void SetBlock(bool torf)
@@ -155,6 +178,10 @@ public class UIBattle : UIBase, ILoopParticleContainer
         for (int i = 0; i < passiveIconItems.Count; i++)
         {
             passiveIconItems[i].Clear();
+        }
+        for (int i = 0; i < miniMonsterInfos.Count; i++)
+        {
+            miniMonsterInfos[i].gameObject.SetActive(false);
         }
     }
     #region 技能輪盤表演

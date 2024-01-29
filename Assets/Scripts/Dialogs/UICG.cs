@@ -54,13 +54,13 @@ public class UICG : UIBase
         var pDefine = tableManager.GetProfessionDataDefine(saveManager.GetContainer<NetworkSaveBattleDungeonContainer>().SelectProfession);
         var t = new UniTaskCompletionSource();
         spine.AnimationState.ClearTrack(0);
-        spine.AnimationState.SetAnimation(0, "gc1", false).Complete += _ =>
+        assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.Speak, pDefine.cgSound1);
+        spine.AnimationState.SetAnimation(0, "assassin_ero", false).Complete += _ =>
         {
             spine.AnimationState.ClearTrack(0);
-            assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.Speak, pDefine.cgSound1);
-            spine.AnimationState.SetAnimation(0, "gc2", false).Complete += async _ =>
+            assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.Speak, pDefine.cgSound2);
+            spine.AnimationState.SetAnimation(0, "assassin_ero_2", false).Complete += async _ =>
             {
-                assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.Speak, pDefine.cgSound2);
                 await FadeOut();
                 t.TrySetResult();
             };
@@ -70,7 +70,6 @@ public class UICG : UIBase
 
     UniTask FadeOut()
     {
-        canvasGroup.interactable = false;
         return canvasGroup.DOFade(0, 0.2f).AsyncWaitForCompletion().AsUniTask();
     }
 }

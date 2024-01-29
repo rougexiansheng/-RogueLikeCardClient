@@ -111,6 +111,7 @@ public class GameFlowInitState : BaseState<GameFlowController, GameFlowControlle
 
 
         ui.Init(battleManager.player);
+        ui.UpdateAntiqueImages(battleManager.player.passives);
         // UI 層級 顯示跳血 設置
         for (int i = 0; i < ui.monsterScreenPoint.Count; i++)
         {

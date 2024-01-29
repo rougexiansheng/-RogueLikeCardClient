@@ -118,8 +118,8 @@ public class GameFlowShopState : BaseState<GameFlowController, GameFlowControlle
 
 
         }
-
-
+        var ui = uIManager.FindUI<UIBattle>();
+        ui.UpdateAntiqueImages(battleManager.player.passives);
         uIManager.RemoveUI(shopUi);
         ShopEnd();
     }

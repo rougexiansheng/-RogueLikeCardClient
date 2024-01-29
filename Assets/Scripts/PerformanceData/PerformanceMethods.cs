@@ -219,7 +219,7 @@ public class PerformanceMethods
         }
         else
         {
-            environmentManager.monsterPoints[(int)shieldData.monsterPosition].hpBar.UpdateMonsterShield(shieldData);
+            environmentManager.monsterPoints[(int)shieldData.monsterPosition].currenthpBar.UpdateMonsterShield(shieldData);
         }
         return default;
     }
@@ -320,8 +320,9 @@ public class PerformanceMethods
         }
         else
         {
+            ui.miniMonsterInfos[(int)healData.monsterPos].SetHp(healData.currentHp / (float)healData.maxHp);
             MonsterPoint mp = environmentManager.monsterPoints[(int)healData.monsterPos];
-            mp.hpBar.SetHp(healData.currentHp, healData.maxHp);
+            mp.currenthpBar.SetHp(healData.currentHp, healData.maxHp);
             target = ui.monsterScreenPoint[(int)healData.monsterPos].transform;
         }
         var uiJump = assetManager.GetObject<UIJumpHpText>();
@@ -350,9 +351,10 @@ public class PerformanceMethods
             MonsterPoint mp = environmentManager.monsterPoints[(int)damageData.monsterPos];
             mp.spineCharactor.PlayAnimationOneShot(SpineAnimationEnum.Hit);
             target = ui.monsterScreenPoint[(int)damageData.monsterPos].transform;
-            mp.hpBar.SetHp(damageData.currentHp, damageData.maxHp);
+            mp.currenthpBar.SetHp(damageData.currentHp, damageData.maxHp);
             var define = dataTableManager.GetMonsterDefine(damageData.monsterId);
             assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.SoundEffect, define.hitSound);
+            ui.miniMonsterInfos[(int)damageData.monsterPos].SetHp(damageData.currentHp / (float)damageData.maxHp);
         }
         else
         {
@@ -391,6 +393,13 @@ public class PerformanceMethods
 
     public async UniTask MonsterAppear(PMonsterAppearData showData)
     {
+        var ui = uIManager.FindUI<UIBattle>();
+        for (int i = 0; i < showData.positions.Count; i++)
+        {
+            ui.miniMonsterInfos[(int)showData.positions[i]].SetDeadMark(false);
+            ui.miniMonsterInfos[(int)showData.positions[i]].gameObject.SetActive(true);
+            ui.miniMonsterInfos[(int)showData.positions[i]].SetHp(1);
+        }
         if (showData.isBoss)
         {
             // 相機抬高
@@ -423,7 +432,6 @@ public class PerformanceMethods
                         ls.Add(environmentManager.ShakeCamera());
                         break;
                     case MonsterAppearEnum.SpeedLine:
-                        var ui = uIManager.FindUI<UIBattle>();
                         ls.Add(ui.SpeedLine());
                         break;
                     default:
@@ -471,7 +479,7 @@ public class PerformanceMethods
         {
             await environmentManager.MoveCameraAngle(attackData.monsterPosition);
             var mp = environmentManager.monsterPoints[(int)attackData.monsterPosition];
-            await mp.hpBar.OnAttack();
+            await mp.currenthpBar.OnAttack();
             var ctrl = mp.spineCharactor;
             ctrl.PlayAnimationOneShot(skillDefine.animationEnum, SpineAnimationEnum.Attack01);
             var monsterDefine = dataTableManager.GetMonsterDefine(attackData.monsterId);
@@ -482,13 +490,24 @@ public class PerformanceMethods
 
     public async UniTask MonsterRemove(PMonsterRemoveData removeData)
     {
+        var ui = uIManager.FindUI<UIBattle>();
+        for (int i = 0; i < removeData.positions.Count; i++)
+        {
+            ui.miniMonsterInfos[(int)removeData.positions[i]].SetDeadMark(true);
+        }
         await environmentManager.MonsterRemove(removeData);
     }
 
     public async UniTask PSummonMonsterData(PSummonMonsterData addData)
     {
         var ls = new List<UniTask>();
-        await UniTask.WhenAll(ls);
+        var ui = uIManager.FindUI<UIBattle>();
+        for (int i = 0; i < addData.positions.Count; i++)
+        {
+            ui.miniMonsterInfos[(int)addData.positions[i]].SetDeadMark(false);
+            ui.miniMonsterInfos[(int)addData.positions[i]].gameObject.SetActive(true);
+            ui.miniMonsterInfos[(int)addData.positions[i]].SetHp(1);
+        }
         for (int i = 0; i < addData.positions.Count; i++)
         {
             ls.Clear();
@@ -505,7 +524,6 @@ public class PerformanceMethods
                         ls.Add(environmentManager.ShakeCamera());
                         break;
                     case MonsterAppearEnum.SpeedLine:
-                        var ui = uIManager.FindUI<UIBattle>();
                         ls.Add(ui.SpeedLine());
                         break;
                     default:

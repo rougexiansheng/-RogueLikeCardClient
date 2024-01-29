@@ -121,19 +121,14 @@ public class EnvironmentManager : IInitializable, ITickable
     /// <param name="isBoss"></param>
     public void SetCenterMonsterHpBar(bool isBoss)
     {
-        var ui = uIManager.FindUI<UIBattle>();
-        ui.bossHpbar.gameObject.SetActive(isBoss);
-        if (isBoss)
+        for (int i = 0; i < monsterPoints.Length; i++)
         {
-            monsterPoints[(int)BattleActor.MonsterPositionEnum.Center].hpBar = ui.bossHpbar;
+            if (i == (int)BattleActor.MonsterPositionEnum.Center)
+            {
+                monsterPoints[i].SetHpBar(isBoss);
+            }
+            else monsterPoints[i].SetHpBar(false);
         }
-        else
-        {
-
-            var mp = monsterPoints[(int)BattleActor.MonsterPositionEnum.Center];
-            mp.hpBar = mp.GetComponentInChildren<UIMonsterHpBar>();
-        }
-
     }
 
     public void RestScene()
@@ -352,7 +347,7 @@ public class EnvironmentManager : IInitializable, ITickable
     public UniTask MonsterNextSkill(PMonsterNextSkillData nextSkillData)
     {
         var define = dataTableManager.GetSkillDefine(nextSkillData.skillId);
-        return monsterPoints[(int)nextSkillData.positionEnum].hpBar.SetSkillIcon(define.icon);
+        return monsterPoints[(int)nextSkillData.positionEnum].currenthpBar.SetSkillIcon(define.icon);
     }
 
     public void SetMonsterPos(List<BattleActor> monsters, bool isElite)
@@ -360,7 +355,7 @@ public class EnvironmentManager : IInitializable, ITickable
         for (int i = 0; i < monsterPoints.Length; i++)
         {
             monsterPoints[i].Clear();
-            monsterPoints[i].hpBar.SetEdge(isElite);
+            monsterPoints[i].currenthpBar.SetEdge(isElite);
         }
         for (int i = 0; i < monsters.Count; i++)
         {
@@ -374,7 +369,7 @@ public class EnvironmentManager : IInitializable, ITickable
         monsterPoint.Clear();
         if (idx < 0) return;
         passiveManager.GetCurrentActorAttribute(monster);
-        monsterPoint.hpBar.SetHp(monster.currentHp, monster.maxHp);
+        monsterPoint.currenthpBar.SetHp(monster.currentHp, monster.maxHp);
         monsterPoint.monsterIndex = idx;
         var monsterDefine = dataTableManager.GetMonsterDefine(monster.monsterId);
         var obj = GameObject.Instantiate(monsterDefine.spineObj, monsterPoint.spinePoint);
@@ -448,7 +443,7 @@ public class EnvironmentManager : IInitializable, ITickable
         var define = dataTableManager.GetPassiveDefine(passiveData.passiveId);
         if (passiveData.isRemove)
         {
-            var passiveItem = mp.hpBar.passiveIconItems.Find(p => p.passiveId == define.id);
+            var passiveItem = mp.currenthpBar.passiveIconItems.Find(p => p.passiveId == define.id);
             if (passiveItem != null)
             {
                 passiveItem.passiveId = 0;
@@ -457,20 +452,20 @@ public class EnvironmentManager : IInitializable, ITickable
         }
         else
         {
-            var passiveItem = mp.hpBar.passiveIconItems.Find(p => p.passiveId == define.id);
+            var passiveItem = mp.currenthpBar.passiveIconItems.Find(p => p.passiveId == define.id);
             if (passiveItem == null)
             {
-                var idx = mp.hpBar.passiveIconItems.FindIndex(p => p.passiveId == 0);
-                if (idx == mp.hpBar.passiveIconItems.Count - 1)
+                var idx = mp.currenthpBar.passiveIconItems.FindIndex(p => p.passiveId == 0);
+                if (idx == mp.currenthpBar.passiveIconItems.Count - 1)
                 {
-                    mp.hpBar.passiveIconItems[idx].DoAddAnimate();
+                    mp.currenthpBar.passiveIconItems[idx].DoAddAnimate();
                 }
                 else
                 {
-                    mp.hpBar.passiveIconItems[idx].passiveId = define.id;
-                    mp.hpBar.passiveIconItems[idx].stackCount.text = passiveData.stackCount.ToString();
-                    mp.hpBar.passiveIconItems[idx].icon.sprite = define.icon;
-                    mp.hpBar.passiveIconItems[idx].DoAddAnimate();
+                    mp.currenthpBar.passiveIconItems[idx].passiveId = define.id;
+                    mp.currenthpBar.passiveIconItems[idx].stackCount.text = passiveData.stackCount.ToString();
+                    mp.currenthpBar.passiveIconItems[idx].icon.sprite = define.icon;
+                    mp.currenthpBar.passiveIconItems[idx].DoAddAnimate();
                 }
             }
             else

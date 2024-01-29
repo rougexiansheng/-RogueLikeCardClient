@@ -31,7 +31,6 @@ public class GameFlowProfitState : BaseState<GameFlowController, GameFlowControl
 
     public override async UniTask Start()
     {
-        // ���t�޵P�M��
         GetController().AddPerformanceData(new PModifyShieldData()
         {
             isPlayer = true,
@@ -62,7 +61,7 @@ public class GameFlowProfitState : BaseState<GameFlowController, GameFlowControl
                 await sdk.BattleGainItem(itemsList[j].id, itemsList[j].count);
             }
         }
-
+        ui.SetBlock(false);
         if (!saveManager.GetContainer<NetworkSaveBattleDungeonContainer>().IsDone)
         {
 
