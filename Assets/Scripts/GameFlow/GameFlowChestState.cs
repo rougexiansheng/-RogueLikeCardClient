@@ -42,6 +42,7 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
     {
         await OpenUIAsync();
         var ui = uIManager.FindUI<UIBattle>();
+        battleManager.ResetPlayerActor();
         ui.UpdateAntiqueImages(battleManager.player.passives);
     }
 

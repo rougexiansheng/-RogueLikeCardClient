@@ -19,6 +19,7 @@ public class MonsterPoint : MonoBehaviour, ILoopParticleContainer
     public void SetHpBar(bool isBoss)
     {
         currenthpBar = isBoss ? bossHpBar : hpBar;
+        currenthpBar.Active(true);
     }
 
     public void Active(bool torf)
@@ -80,7 +81,8 @@ public class MonsterPoint : MonoBehaviour, ILoopParticleContainer
     {
         if (spineCharactor != null) Destroy(spineCharactor.gameObject);
         monsterIndex = -1;
-        currenthpBar.Clear();
+        if (bossHpBar != null) bossHpBar.Clear();
+        hpBar.Clear();
         ResetLoopParticle();
         Active(false);
     }

@@ -41,6 +41,7 @@ public class GameFlowGetAntiqueState : BaseState<GameFlowController, GameFlowCon
     {
         await OpenUIAsync();
         var ui = uIManager.FindUI<UIBattle>();
+        battleManager.ResetPlayerActor();
         ui.UpdateAntiqueImages(battleManager.player.passives);
     }
 
