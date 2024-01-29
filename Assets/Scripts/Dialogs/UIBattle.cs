@@ -80,7 +80,10 @@ public class UIBattle : UIBase, ILoopParticleContainer
     int skillRange = 0;
     [SerializeField]
     CanvasGroup canvasGroup;
-
+    [SerializeField]
+    TMPro.TMP_Text titleText;
+    [SerializeField]
+    TMPro.TMP_Text levelText;
 
     /// <summary>跳寫跟隨的位置點</summary>
     public List<UIFollowObject> monsterScreenPoint;
@@ -145,6 +148,27 @@ public class UIBattle : UIBase, ILoopParticleContainer
         for (int i = 0; i < passiveIconItems.Count; i++)
         {
             passiveIconItems[i].Clear();
+        }
+    }
+
+    public void SetTitle(int id)
+    {
+        var dDefine = dataTableManager.GetDungeonDataDefine(id);
+        levelText.text = dDefine.mapLayer.ToString() + "-" + dDefine.UIPosition.ToString();
+        switch (dDefine.sceneId)
+        {
+            case 1:
+                titleText.text = "青青草原";
+                break;
+            case 2:
+                titleText.text = "哥布林巢穴";
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                break;
         }
     }
 

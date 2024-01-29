@@ -394,6 +394,10 @@ public class PerformanceMethods
     public async UniTask MonsterAppear(PMonsterAppearData showData)
     {
         var ui = uIManager.FindUI<UIBattle>();
+        for (int i = 0; i < ui.miniMonsterInfos.Count; i++)
+        {
+            ui.miniMonsterInfos[i].gameObject.SetActive(false);
+        }
         for (int i = 0; i < showData.positions.Count; i++)
         {
             ui.miniMonsterInfos[(int)showData.positions[i]].SetDeadMark(false);

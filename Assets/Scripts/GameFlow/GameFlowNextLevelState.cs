@@ -116,7 +116,8 @@ public class GameFlowNextLevelState : BaseState<GameFlowController, GameFlowCont
                 GetController().AddPerformanceData(new PUIAnimatonStateData { stateEnum = UIBattle.UIAnimatonStateEnum.SceneName, autoClose = true, sprite = sceneDefine.sceneNameSprite });
             }
         }
-
+        var ui = uIManager.FindUI<UIBattle>();
+        ui.SetTitle(doungeonData.dungeonId);
         // 表演轉場或是移動相機
         if (isChangeScene)
         {

@@ -108,6 +108,7 @@ public class UISkillBattleItem : MonoBehaviour
         button.onClick.RemoveAllListeners();
         readyCastEffect.Stop();
         sealedEffect.Stop();
+        ResetPerformace();
         for (int i = 0; i < levelObjs.Length; i++)
         {
             levelObjs[i].SetActive(false);
