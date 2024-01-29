@@ -56,8 +56,8 @@ public class UISkillChangePage : UIBase
             item.SetText(0);
         }
 
-        var orignalDic = createManaColorDic(dataTableManager.GetSkillDefine(orignalID).costColors);
-        var changeDic = createManaColorDic(dataTableManager.GetSkillDefine(chnageID).costColors);
+        var orignalDic = createManaColorDic(dataTableManager.GetSkillDefine(orignalID).poolColor);
+        var changeDic = createManaColorDic(dataTableManager.GetSkillDefine(chnageID).poolColor);
 
         foreach (var item in changeDic)
         {
@@ -100,12 +100,12 @@ public class UISkillChangePage : UIBase
         }
     }
 
-    private Dictionary<ManaItemColor, int> createManaColorDic(List<SkillCostColorData> costColorList)
+    private Dictionary<ManaItemColor, int> createManaColorDic(List<SkillCostColorEnum> costColorList)
     {
         Dictionary<ManaItemColor, int> result = new Dictionary<ManaItemColor, int>();
         foreach (var cost in costColorList)
         {
-            var colorsList = skillManager.GetColorsList(cost.colorEnum);
+            var colorsList = skillManager.GetColorsList(cost);
             ManaItemColor itemColor = ManaItemColor.Non;
             if (colorsList.Count > 1)
             {
@@ -126,8 +126,14 @@ public class UISkillChangePage : UIBase
                     itemColor = ManaItemColor.Blue;
                 }
             }
-            result.Add(itemColor, cost.count);
-
+            if (result.ContainsKey(itemColor))
+            {
+                result[itemColor]++;
+            }
+            else
+            {
+                result.Add(itemColor, 1);
+            }
         }
         return result;
     }
