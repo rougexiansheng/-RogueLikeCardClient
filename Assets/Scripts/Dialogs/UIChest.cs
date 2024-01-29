@@ -45,6 +45,9 @@ public class UIChest : UIBase
     public UITopBar uITopBar;
 
     public UniTaskCompletionSource<ViewItemData> selectTask;
+
+    [SerializeField]
+    public ParticleItem HealParticle;
     #endregion
 
 

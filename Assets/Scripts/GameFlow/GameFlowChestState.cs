@@ -21,7 +21,11 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
     NetworkSaveManager saveManager;
     [Inject]
     BattleManager battleManager;
+    [Inject]
+    GameFlowController gameFlow;
 
+    [Inject]
+    DataTableManager dataTableManager;
     [Inject]
     SDKProtocol.IProtocolBridge sdk;
     public override UniTask End()
@@ -98,7 +102,36 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
         await UniTask.WaitUntil(() => { return chestUi.IsDone; });
         foreach (var item in itemDataList)
         {
-            await sdk.BattleGainItem(item.id, item.count);
+            var result = await sdk.BattleGainItem(item.id, item.count);
+            if (!result) continue;
+            //依照物品類型進行表演&處理，目前只有治療、技能物品。
+            switch (item.itemType)
+            {
+                case ItemTpyeEnum.Item:
+                    var effectDefine = dataTableManager.GetItemEffectDataDefine(item.arg);
+                    switch (effectDefine.effect.type)
+                    {
+                        case ItemEffectTypeEnum.cure:
+                            chestUi.HealParticle.Play();
+                            var value = battleManager.OnHeal(battleManager.player, effectDefine.effect.Arg2);
+                            var healPerformance = new POnHealData();
+                            healPerformance.Init(battleManager.player, value);
+                            gameFlow.AddPerformanceData(healPerformance);
+                            await UniTask.Delay((int)(chestUi.HealParticle.ParticleSystemLength() * 1000)); // 配合特效時間
+                            break;
+                        case ItemEffectTypeEnum.skill:
+                            break;
+                    }
+                    break;
+                case ItemTpyeEnum.Skill:
+                    await OpenSkillUi(item.arg);
+                    break;
+                case ItemTpyeEnum.Chest:
+                    //取得寶相的掉落物並且通知 sever
+                    //var itmeLs = itemManager.GetItmes(mapP.dropGroupId, mapP.dropCount);
+                    break;
+
+            }
         }
         await chestUi.uITopBar.IsEffectEnd();
         uIManager.RemoveUI(chestUi);
@@ -106,6 +139,12 @@ public class GameFlowChestState : BaseState<GameFlowController, GameFlowControll
         ChestEnd();
     }
 
+    private async UniTask OpenSkillUi(int skillId)
+    {
+        var skill = await uIManager.OpenUI<UISkill>();
+        await skill.OpenChangeSkillPage(saveManager.GetContainer<NetworkSaveBattleSkillContainer>().GetOriginalSKillList(), skillId);
+        var isChange = await skill.IsSkillsChange();
+    }
     /// <summary>
     /// 遺跡結束，執行下一階段 (Flow)
     /// </summary>
