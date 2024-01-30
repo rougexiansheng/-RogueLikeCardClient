@@ -409,6 +409,9 @@ public class SkillAbilityMethods
         passiveManager.OnActorPassive(battleData.sender, PassiveTriggerEnum.OnHeal, battleData);
         // 擊中特效and音效
         var value = battleManager.OnHeal(battleData.sender, battleData.currentHeal.GetValue());
+        var p = new POnHealData();
+        p.Init(battleData.sender, value);
+        battleData.pMultipleDatas.performanceDatas.Add(p);
         battleData.currentHeal.RestValue(value);
         battleData.pMultipleDatas.AddPShowParticle();
         gameFlow.AddPerformanceData(battleData.pMultipleDatas);
@@ -527,6 +530,9 @@ public class SkillAbilityMethods
             passiveManager.OnActorPassive(battleData.sender, PassiveTriggerEnum.OnHeal, battleData);
             // 擊中特效and音效
             var value = battleManager.OnHeal(battleData.sender, battleData.currentHeal.GetValue());
+            var p = new POnHealData();
+            p.Init(battleData.sender, value);
+            battleData.pMultipleDatas.performanceDatas.Add(p);
             battleData.currentHeal.RestValue(value);
             battleData.pMultipleDatas.AddPShowParticle();
             gameFlow.AddPerformanceData(battleData.pMultipleDatas);
@@ -617,7 +623,9 @@ public class SkillAbilityMethods
             passiveManager.OnActorPassive(battleData.sender, PassiveTriggerEnum.OnHeal, battleData);
             // 擊中特效and音效
             var value = battleManager.OnHeal(battleData.sender, battleData.currentHeal.GetValue());
-            battleData.currentHeal.RestValue(value);
+            var p = new POnHealData();
+            p.Init(battleData.sender, value);
+            battleData.pMultipleDatas.performanceDatas.Add(p);
             battleData.pMultipleDatas.AddPShowParticle();
             gameFlow.AddPerformanceData(battleData.pMultipleDatas);
             battleData.currentHeal.RestValue(value);
@@ -826,7 +834,6 @@ public class SkillAbilityMethods
             passiveManager.OnActorPassive(battleData.sender, PassiveTriggerEnum.OnHeal, battleData);
 
             var value = battleManager.OnHeal(battleData.sender, battleData.currentHeal.GetValue());
-            battleData.currentHeal.RestValue(value);
             battleData.pMultipleDatas.AddPShowParticle();
             gameFlow.AddPerformanceData(battleData.pMultipleDatas);
             battleData.currentHeal.RestValue(value);
@@ -851,7 +858,6 @@ public class SkillAbilityMethods
         var p = new POnHealData();
         p.Init(target, value);
         battleData.pMultipleDatas.performanceDatas.Add(p);
-        battleData.currentHeal.RestValue(value);
         battleData.pMultipleDatas.AddPShowParticle();
         gameFlow.AddPerformanceData(battleData.pMultipleDatas);
         battleData.currentHeal.RestValue(value);

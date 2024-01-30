@@ -378,6 +378,7 @@ public class EnvironmentManager : IInitializable, ITickable
         List<UIItemIcon> itemIcons = new List<UIItemIcon>();
         for (int i = 0; i < removeData.positions.Count; i++)
         {
+            if (removeData.acquisitionList == null) continue;
             foreach (var icon in removeData.acquisitionList)
             {
                 var uiDropItem = assetManager.GetObject<UIItemIcon>();
