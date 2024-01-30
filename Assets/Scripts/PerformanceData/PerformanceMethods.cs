@@ -219,7 +219,7 @@ public class PerformanceMethods
         }
         else
         {
-            environmentManager.monsterPoints[(int)shieldData.monsterPosition].currenthpBar.UpdateMonsterShield(shieldData);
+            environmentManager.monsterPoints[(int)shieldData.monsterPosition].hpBar.UpdateMonsterShield(shieldData);
         }
         return default;
     }
@@ -322,7 +322,7 @@ public class PerformanceMethods
         {
             ui.miniMonsterInfos[(int)healData.monsterPos].SetHp(healData.currentHp / (float)healData.maxHp);
             MonsterPoint mp = environmentManager.monsterPoints[(int)healData.monsterPos];
-            mp.currenthpBar.SetHp(healData.currentHp, healData.maxHp);
+            mp.hpBar.SetHp(healData.currentHp, healData.maxHp);
             target = ui.monsterScreenPoint[(int)healData.monsterPos].transform;
         }
         var uiJump = assetManager.GetObject<UIJumpHpText>();
@@ -351,7 +351,7 @@ public class PerformanceMethods
             MonsterPoint mp = environmentManager.monsterPoints[(int)damageData.monsterPos];
             mp.spineCharactor.PlayAnimationOneShot(SpineAnimationEnum.Hit);
             target = ui.monsterScreenPoint[(int)damageData.monsterPos].transform;
-            mp.currenthpBar.SetHp(damageData.currentHp, damageData.maxHp);
+            mp.hpBar.SetHp(damageData.currentHp, damageData.maxHp);
             var define = dataTableManager.GetMonsterDefine(damageData.monsterId);
             assetManager.PlayerAudio(AssetManager.AudioMixerVolumeEnum.SoundEffect, define.hitSound);
             ui.miniMonsterInfos[(int)damageData.monsterPos].SetHp(damageData.currentHp / (float)damageData.maxHp);
@@ -483,7 +483,7 @@ public class PerformanceMethods
         {
             await environmentManager.MoveCameraAngle(attackData.monsterPosition);
             var mp = environmentManager.monsterPoints[(int)attackData.monsterPosition];
-            await mp.currenthpBar.OnAttack();
+            await mp.hpBar.OnAttack();
             var ctrl = mp.spineCharactor;
             ctrl.PlayAnimationOneShot(skillDefine.animationEnum, SpineAnimationEnum.Attack01);
             var monsterDefine = dataTableManager.GetMonsterDefine(attackData.monsterId);
