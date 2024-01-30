@@ -100,7 +100,6 @@ public class GameFlowNextLevelState : BaseState<GameFlowController, GameFlowCont
         {
             // 設置怪物
             battleManager.monsters.Clear();
-            environmentManager.SetCenterMonsterHpBar(doungeonData.nodeEnum == MapNodeEnum.Boss);
             await battleManager.SetMonsterActor(doungeonData.monsterPosAndId, doungeonData.acquisitionItems);
             environmentManager.SetMonsterPos(battleManager.monsters, doungeonData.nodeEnum == MapNodeEnum.EliteMonster);
             GetController().UpdatePassiveData(battleManager.player);

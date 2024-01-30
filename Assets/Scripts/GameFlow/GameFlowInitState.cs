@@ -79,7 +79,6 @@ public class GameFlowInitState : BaseState<GameFlowController, GameFlowControlle
         }
 
         var doungeonData = dataManager.GetCurrentDungeonLeveData();
-        environmentManager.SetCenterMonsterHpBar(doungeonData.nodeEnum == MapNodeEnum.Boss);
         // 預載入怪物
         await preloadManager.PreloadAllMonster();
         // 設置怪物
