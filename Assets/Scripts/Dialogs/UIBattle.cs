@@ -527,17 +527,18 @@ public class UIBattle : UIBase, ILoopParticleContainer
         maxHpText.text = max.ToString();
         var value = current / (float)max;
         playerHpImg.DOFillAmount(value, 0.2f);
-        if (value < 0.6f && playerHpImg.fillAmount > 0.6f && spineCharactor.currentSkin == SpineCharacterCtrl.SpineSkinEnum.Origin)
-        {
-            // 表演爆衣
-            spineCharactor.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Damage);
-            await uIDressBreak.Show(SpineCharacterCtrl.SpineSkinEnum.Origin);
-        }
-        else if (value < 0.3f && playerHpImg.fillAmount > 0.3f && spineCharactor.currentSkin == SpineCharacterCtrl.SpineSkinEnum.Damage)
+
+        if (value < 0.3f && spineCharactor.currentSkin < SpineCharacterCtrl.SpineSkinEnum.Damage02)
         {
             // 表演爆衣
             spineCharactor.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Damage02);
             await uIDressBreak.Show(SpineCharacterCtrl.SpineSkinEnum.Damage);
+        }
+        else if (value < 0.6f && spineCharactor.currentSkin < SpineCharacterCtrl.SpineSkinEnum.Damage)
+        {
+            // 表演爆衣
+            spineCharactor.SetSkin(SpineCharacterCtrl.SpineSkinEnum.Damage);
+            await uIDressBreak.Show(SpineCharacterCtrl.SpineSkinEnum.Origin);
         }
     }
     /// <summary>
